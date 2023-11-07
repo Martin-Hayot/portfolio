@@ -7,12 +7,32 @@ import Card from "../components/Card.astro";
     <nav
         class="hidden w-full l justify-between text-stone-300 text-xl z-1 lg:flex bg-transparent pt-6"
     >
-        <a href="/" class="">Martin Hayot</a>
+        <a
+            href="/"
+            class="hover:scale-110 transition-all duration-200 hover:text-white"
+            >Martin Hayot</a
+        >
         <div class="flex z-10 justify-between gap-12 pr-10">
-            <a href="/projects" class="">Projects</a>
-            <a href="/blog">Blog</a>
-            <a href="/about">About me</a>
-            <a href="/contact">Contact me</a>
+            <a
+                href="/projects"
+                class="hover:scale-110 transition-all duration-200 hover:text-white"
+                >Projects</a
+            >
+            <a
+                href="/blog"
+                class="hover:scale-110 transition-all duration-200 hover:text-white"
+                >Blog</a
+            >
+            <a
+                href="/about"
+                class="hover:scale-110 transition-all duration-200 hover:text-white"
+                >About me</a
+            >
+            <a
+                href="/contact"
+                class="hover:scale-110 transition-all duration-200 hover:text-white"
+                >Contact me</a
+            >
         </div>
     </nav>
     <main class="mx-auto h-screen">
@@ -30,7 +50,7 @@ import Card from "../components/Card.astro";
                 <img src="moon2.png" class="h-64 w-64 3xl:w-80 3xl:h-80" />
                 <img
                     src="martin.jpeg"
-                    class="absolute w-24 h-24 left-20 top-20 rounded-full animate-orbit z-0 3xl:left-[8em] 3xl:top-[7.5em]"
+                    class="absolute w-24 h-24 left-20 top-20 rounded-full animate-orbit z-0 3xl:left-[8em] 3xl:top-[7.5em] cursor-auto"
                 />
             </div>
         </div>
@@ -83,6 +103,10 @@ import Card from "../components/Card.astro";
 
     .animate-orbit {
         animation: orbit 30s linear infinite;
+    }
+
+    .animate-orbit:hover {
+        animation-play-state: paused;
     }
     .link-card-grid {
         display: grid;
