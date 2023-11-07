@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+
+const title = 'Welcome to Martin\'s Space';
+---
+
+<Layout title={title}>
+	<main class="mx-auto w-[90%]">
+		<div class="flex justify-center m-16">
+			<h1 class="text-6xl text-sky-100 text-center mb-20 my-10 z-10">{title}</h1>
+			<img src="martin.jpeg" class="w-44 h-44 rounded-full animate-orbit"></img>
+		</div>
+		
+		<ul role="list" class="link-card-grid">
+			<Card
+				href="http://localhost:4321"
+				title="Documentation"
+				body="Learn how Astro works and explore the official API docs."
+			/>
+			<Card
+				href="http://localhost:4321"
+				title="Integrations"
+				body="Supercharge your project with new frameworks and libraries."
+			/>
+			<Card
+				href="http://localhost:4321"
+				title="Themes"
+				body="Explore a galaxy of community-built starter themes."
+			/>
+			<Card
+				href="http://localhost:4321"
+				title="Community"
+				body="Come say hi to our amazing Discord community. ❤️"
+			/>
+		</ul>
+	</main>
+</Layout>
+
+
+
+<style>
+	@keyframes orbit {
+		from {
+			transform: rotate(0deg) translateX(100px) rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg) translateX(100px) rotate(-360deg);
+		}
+	}
+
+	.animate-orbit {
+		animation: orbit 10s linear infinite;
+	}
+</style>
