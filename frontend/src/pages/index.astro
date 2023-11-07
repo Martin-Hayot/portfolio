@@ -34,7 +34,10 @@ import Card from "../components/Card.astro";
                 />
             </div>
         </div>
-        <div class="3xl:mt-[35em]">
+        <div
+            class="3xl:mt-[35em] cursor-pointer"
+            onclick="{window.scrollTo({top: 1000,behavior:'smooth'})}"
+        >
             <div class="loader mx-auto mt-48 md:mt-32 lg:mt-60"></div>
             <p class="hidden md:block md:text-xl md:text-center md:mt-2">
                 scroll down
@@ -43,7 +46,7 @@ import Card from "../components/Card.astro";
     </main>
 </Layout>
 
-<section class="h-[40em]">
+<section class="h-[40em] mt-40" id="Cards">
     <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
         <Card
             href="http://localhost:4321/projects"
