@@ -26,7 +26,9 @@ const toggleMenu = () => {
             class="hover:scale-110 z-30 text-3xl transition-all duration-200 hover:text-white"
             >Martin Hayot</a
         >
-        <div class="hidden md:flex h-10 md:space-x-16 md:pr-20">
+        <div
+            class="hidden lg:flex h-10 space-x-10 lg:space-x-12 xl:space-x-16 lg:pr-20"
+        >
             <a
                 href="/projects"
                 class="hover:scale-110 transition-all duration-200 hover:text-white"
@@ -48,9 +50,9 @@ const toggleMenu = () => {
                 >Contact me</a
             >
         </div>
-        <div class="md:hidden mt-2">
+        <div class="lg:hidden mt-2">
             <button
-                class="z-40 block hamburger md:hidden focus:outline-none"
+                class="z-40 block hamburger lg:hidden focus:outline-none"
                 id="menu-btn"
                 type="button"
             >
