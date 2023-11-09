@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const menu = ref(null);
 const menuBtn = ref(null);
@@ -8,6 +8,15 @@ onMounted(() => {
     menu.value = document.getElementById("menu");
     menuBtn.value = document.getElementById("menu-btn");
     menuBtn.value.addEventListener("click", toggleMenu);
+    document.addEventListener("popstate", () => {
+        menu.value.classList.toggle("hidden");
+        menu.value.classList.toggle("flex");
+        menuBtn.value.classList.toggle("open");
+    });
+});
+
+onUnmounted(() => {
+    menuBtn.value.removeEventListener("click", toggleMenu);
 });
 
 const toggleMenu = () => {
@@ -15,6 +24,8 @@ const toggleMenu = () => {
     menu.value.classList.toggle("flex");
     menuBtn.value.classList.toggle("open");
 };
+
+// listen on page navigation to close the menu
 </script>
 
 <template>
@@ -27,7 +38,7 @@ const toggleMenu = () => {
             >Martin Hayot</a
         >
         <div
-            class="hidden lg:flex h-10 space-x-10 lg:space-x-12 xl:space-x-16 lg:pr-20"
+            class="hidden lg:flex h-10 space-x-10 lg:space-x-12 xl:space-x-16 lg:pr-6 xl:pr-12"
         >
             <a
                 href="/projects"
