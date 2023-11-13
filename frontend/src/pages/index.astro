@@ -8,7 +8,7 @@ import Footer from "../components/Footer.astro";
 <Layout title={"Martin'space"}>
     <header class="mx-auto h-screen overscroll-y-none">
         <Navbar client:load />
-        <div class="flex flex-col lg:flex-row 3xl:ml-40">
+        <div class="flex flex-col lg:flex-row">
             <h1
                 class="text-7xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-20 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10"
             >
@@ -43,10 +43,10 @@ import Footer from "../components/Footer.astro";
         </div>
     </header>
     <div
-        class="3xl:mt-[32em] xl:mt-[15em] cursor-pointer hidden lg:block"
+        class="cursor-pointer hidden lg:block -mt-24 3xl:-mt-32"
         onclick="{document.getElementById('header-main').scrollIntoView({behavior: 'smooth'});}"
     >
-        <div class="loader mx-auto mt-48 md:mt-32 lg:mt-60"></div>
+        <div class="loader mx-auto"></div>
         <p class="hidden md:block md:text-xl md:text-center md:mt-2">
             scroll down
         </p>
