@@ -30,7 +30,7 @@ const toggleMenu = () => {
 
 <template>
     <nav
-        class="flex items-center text-2xl justify-between text-neutral-200 h-20"
+        class="flex items-center text-2xl justify-between text-neutral-200 h-20 mx-10"
     >
         <a
             href="/"

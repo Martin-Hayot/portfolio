@@ -2,67 +2,112 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import Navbar from "../components/NavBar.vue";
+import Footer from "../components/Footer.astro";
 ---
 
-<Navbar client:load />
-<Layout title={"Martin'space"} />
-<main class="mx-auto h-screen">
-    <div class="flex flex-col lg:flex-row 3xl:ml-40">
-        <h1
-            class="text-7xl xl:text-9xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-20 lg:text-left lg:pt-40 lg:mt-20 xl:ml-20 z-10"
-        >
-            <span>Welcome to</span><br />
-            <span
-                class="lg:pl-20 bg-gradient-to-br from-orange-500 from-10% to-purple-600 inline-block text-transparent bg-clip-text"
-                >Martin's space</span
+<Layout title={"Martin'space"}>
+    <header class="mx-auto h-screen">
+        <Navbar client:load />
+        <div class="flex flex-col lg:flex-row 3xl:ml-40">
+            <h1
+                class="text-7xl xl:text-9xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-20 lg:text-left lg:pt-40 lg:mt-20 xl:ml-20 z-10"
             >
-        </h1>
-        <div class="flex relative mx-auto mt-32 lg:mt-60 3xl:mt-72">
+                <span>Welcome to</span><br />
+                <span
+                    class="lg:pl-20 bg-gradient-to-br from-orange-500 from-10% to-purple-600 inline-block text-transparent bg-clip-text"
+                    >Martin's space</span
+                >
+            </h1>
+            <div class="flex relative mx-auto mt-32 lg:mt-60 3xl:mt-72">
+                <img
+                    src="astro_earth.png"
+                    class="h-48 w-48 md:w-60 md:h-60 3xl:w-80 3xl:h-80"
+                />
+                <img
+                    src="martin.jpeg"
+                    class="absolute w-16 h-16 md:w-24 md:h-24 left-20 top-20 rounded-full animate-orbit z-0 3xl:hidden 3xl:left-[8em] 3xl:top-[9em] cursor-auto"
+                />
+                <img
+                    src="martin.jpeg"
+                    class="hidden absolute w-16 h-16 md:w-24 md:h-24 left-20 top-20 3xl:block rounded-full animate-orbit-lg z-0 3xl:left-[8em] 3xl:top-[9em] cursor-auto"
+                />
+            </div>
+        </div>
+        <div
+            class="3xl:mt-[32em] xl:mt-[15em] cursor-pointer hidden lg:block"
+            onclick="{document.getElementById('header-main').scrollIntoView({behavior: 'smooth'});}"
+        >
+            <div class="loader mx-auto mt-48 md:mt-32 lg:mt-60"></div>
+            <p class="hidden md:block md:text-xl md:text-center md:mt-2">
+                scroll down
+            </p>
+        </div>
+    </header>
+    <div id="header-main" class="h-20"></div>
+    <main
+        class="mx-auto mt-20 bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
+        id="about-me"
+    >
+        <div class="flex flex-col xl:flex-row justify-between items-center">
+            <div class="p-10 pr-20 pb-16">
+                <h2 class="text-4xl 3xl:text-5xl text-white text-left pl-16">
+                    About me
+                </h2>
+                <p class="text-xl 3xl:text-2xl pl-16 pt-8">
+                    Hi, my name is Martin. I'm passionate about coding and
+                    learning new things.
+                    <br />
+                     I'm currently studying computer science at
+                    <a href="" class="text-violet-600">EPHEC</a>.
+                    <br />
+                    <br />
+                     I'm also a self-taught developer. I'm always looking for
+                    new challenges and opportunities to learn new things.
+                    <br />
+                    <br />
+
+                     My goal is to become a full-stack developer. But I particularly
+                    love APIs and backend development.
+                    <br />
+                     Recently, I've started learning
+                    <a href="" class="text-violet-600">Go</a> and I'm really
+                    looking forward to implement it in my future projects.
+                </p>
+            </div>
+
             <img
-                src="moon2.png"
-                class="h-48 w-48 md:w-60 md:h-60 3xl:w-80 3xl:h-80"
-            />
-            <img
-                src="martin.jpeg"
-                class="absolute w-16 h-16 md:w-24 md:h-24 left-20 top-20 rounded-full animate-orbit z-0 3xl:left-[8em] 3xl:top-[7.5em] cursor-auto"
+                src="/astro_on_computer.jpg"
+                class="md:mb-10 md:h-auto md:my-auto md:rounded-full 2xl:w-96 3xl:w-[32em] 2xl:my-0 2xl:mr-0 2xl:rounded-none md:w-60 xl:mr-16"
             />
         </div>
-    </div>
-    <div
-        class="3xl:mt-[35em] cursor-pointer hidden lg:block"
-        onclick="{window.scrollTo({top: 1000,behavior:'smooth'})}"
-    >
-        <div class="loader mx-auto mt-48 md:mt-32 lg:mt-60"></div>
-        <p class="hidden md:block md:text-xl md:text-center md:mt-2">
-            scroll down
-        </p>
-    </div>
-</main>
-
-<section class="h-[40em] mt-40" id="Cards">
-    <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
-        <Card
-            href="http://localhost:4321/projects"
-            title="My Projects "
-            body="Learn more about my projects and see them in action."
-        />
-        <Card
-            href="http://localhost:4321/"
-            title="My Github profile "
-            body="Check out my Github profile and see what I'm working on."
-        />
-        <Card
-            href="http://localhost:4321"
-            title="My blog "
-            body="Explore a galaxy of blog posts on web development, APIs, and more."
-        />
-        <Card
-            href="http://localhost:4321"
-            title="About me "
-            body="Learn more about me and my journey as a developer."
-        />
-    </ul>
-</section>
+    </main>
+    <section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
+            <Card
+                href="/projects"
+                title="My Projects "
+                body="Learn more about my projects and see them in action."
+            />
+            <Card
+                href="https://github.com/Martin-Hayot"
+                title="My Github profile "
+                body="Check out my Github profile and see what I'm working on."
+                target="_blank"
+            />
+            <Card
+                href="/blog"
+                title="My blog "
+                body="Explore a galaxy of blog posts on web development, APIs, and more."
+            />
+            <Card
+                href="/about"
+                title="About me "
+                body="Learn more about me and my journey as a developer."
+            />
+        </ul>
+    </section>
+    <Footer />
+</Layout>
 
 <style>
     @keyframes orbit {
@@ -74,11 +119,25 @@ import Navbar from "../components/NavBar.vue";
         }
     }
 
+    @keyframes orbit-lg {
+        from {
+            transform: rotate(0deg) translateX(20em) rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg) translateX(20em) rotate(-360deg);
+        }
+    }
+
     .animate-orbit {
         animation: orbit 30s linear infinite;
     }
 
-    .animate-orbit:hover {
+    .animate-orbit-lg {
+        animation: orbit-lg 30s linear infinite;
+    }
+
+    .animate-orbit:hover,
+    .animate-orbit-lg:hover {
         animation-play-state: paused;
     }
     .link-card-grid {

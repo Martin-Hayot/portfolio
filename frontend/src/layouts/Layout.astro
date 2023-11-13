@@ -15,22 +15,23 @@ const { title } = Astro.props;
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <ViewTransitions />
+        <ViewTransitions fallback="animate" />
         <title>{title}</title>
     </head>
     <body
-        class="bg-neutral-950 px-10 text-sm text-neutral-400 overflow-x-hidden relative"
+        class="bg-neutral-950 text-sm text-neutral-400 overflow-x-hidden relative"
     >
         <div
             class="absolute -z-10 top-0 left-0 w-screen h-full bg-repeat bg-center bg-[url('/background.png')] bg-[length:500px_250px;]"
+            id="background"
         >
         </div>
         <div
-            class="fixed -z-10 h-[134px] w-[134px] md:h-[200px] md:w-[200px] lg:w-[300px] lg:h-[300px] rounded-full overflow-x-hidden bg-orange-500 blur-[150px] md:blur-[350px] opacity-50 left-0 top-0"
+            class="fixed -z-10 h-[134px] w-[134px] md:h-[200px] md:w-[200px] lg:w-[300px] lg:h-[300px] 3xl:w-[380px] 3xl:h-[380px] rounded-full overflow-x-hidden bg-orange-500 blur-[150px] md:blur-[350px] opacity-50 left-0 top-0"
         >
         </div>
         <div
-            class="fixed -z-10 h-[134px] w-[134px] md:w-[300px] md:h-[300px] rounded-full bg-violet-500 blur-[150px] md:blur-[350px] opacity-55 right-0 bottom-0"
+            class="fixed -z-10 h-[134px] w-[134px] md:w-[300px] md:h-[300px] 3xl:w-[380px] 3xl:h-[380px] rounded-full bg-violet-500 blur-[150px] md:blur-[350px] opacity-55 right-0 bottom-0"
         >
         </div>
         <slot />
@@ -61,5 +62,24 @@ const { title } = Astro.props;
                     monospace;
             }
         </style>
+        <script type="text/javascript">
+            const background = document.getElementById("background");
+
+            let xValue = 0,
+                yValue = 0;
+
+            window.addEventListener("mousemove", (e) => {
+                xValue = e.clientX - window.innerWidth / 2;
+                background.style.transform = `translate(${xValue / 200}px)`;
+            });
+
+            window.addEventListener("popstate", () => {
+                window.location.reload();
+            });
+
+            document.addEventListener("astro:after-swap", (e) => {
+                document.location.reload();
+            });
+        </script>
     </body>
 </html>
