@@ -6,11 +6,11 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout title={"Martin'space"}>
-    <header class="mx-auto h-screen">
+    <header class="mx-auto h-screen overscroll-y-none">
         <Navbar client:load />
         <div class="flex flex-col lg:flex-row 3xl:ml-40">
             <h1
-                class="text-7xl xl:text-9xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-20 lg:text-left lg:pt-40 lg:mt-20 xl:ml-20 z-10"
+                class="text-7xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-20 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10"
             >
                 <span>Welcome to</span><br />
                 <span
@@ -25,101 +25,125 @@ import Footer from "../components/Footer.astro";
                 />
                 <img
                     src="martin.jpeg"
-                    class="absolute w-16 h-16 md:w-24 md:h-24 left-20 top-20 rounded-full animate-orbit z-0 3xl:hidden 3xl:left-[8em] 3xl:top-[9em] cursor-auto"
+                    class="absolute w-16 h-16 left-16 top-16 rounded-full animate-orbit-sm z-0 md:hidden cursor-pointer"
                 />
                 <img
                     src="martin.jpeg"
-                    class="hidden absolute w-16 h-16 md:w-24 md:h-24 left-20 top-20 3xl:block rounded-full animate-orbit-lg z-0 3xl:left-[8em] 3xl:top-[9em] cursor-auto"
+                    class="hidden absolute w-20 h-20 left-20 top-20 md:block xl:hidden rounded-full animate-orbit-md z-0 cursor-pointer"
+                />
+                <img
+                    src="martin.jpeg"
+                    class="hidden xl:block 3xl:hidden w-24 h-24 animate-orbit-lg rounded-full absolute left-24 top-24 z-0 cursor-pointer"
+                />
+                <img
+                    src="martin.jpeg"
+                    class="hidden 3xl:block w-24 h-24 animate-orbit-xl rounded-full absolute left-24 top-24 z-0 cursor-pointer"
                 />
             </div>
         </div>
-        <div
-            class="3xl:mt-[32em] xl:mt-[15em] cursor-pointer hidden lg:block"
-            onclick="{document.getElementById('header-main').scrollIntoView({behavior: 'smooth'});}"
-        >
-            <div class="loader mx-auto mt-48 md:mt-32 lg:mt-60"></div>
-            <p class="hidden md:block md:text-xl md:text-center md:mt-2">
-                scroll down
+    </header>
+    <div
+        class="3xl:mt-[32em] xl:mt-[15em] cursor-pointer hidden lg:block"
+        onclick="{document.getElementById('header-main').scrollIntoView({behavior: 'smooth'});}"
+    >
+        <div class="loader mx-auto mt-48 md:mt-32 lg:mt-60"></div>
+        <p class="hidden md:block md:text-xl md:text-center md:mt-2">
+            scroll down
+        </p>
+    </div>
+</Layout>
+<div id="header-main" class="h-40 md:h-20"></div>
+<main
+    class="mx-auto mt-32 bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
+    id="about-me"
+>
+    <div class="flex flex-col xl:flex-row justify-between items-center">
+        <div class="p-8 md:pr-20 pb-16">
+            <h2 class="text-4xl 3xl:text-5xl text-white text-left">About me</h2>
+            <p class="text-xl 3xl:text-2xl pt-8">
+                Hi, my name is Martin. I'm passionate about coding and learning
+                new things.
+                <br />
+                 I'm currently studying computer science at
+                <a href="" class="text-violet-600">EPHEC</a>.
+                <br />
+                <br />
+                 I'm also a self-taught developer. I'm always looking for new
+                challenges and opportunities to learn new things.
+                <br />
+                <br />
+
+                 My goal is to become a full-stack developer. But I particularly
+                love APIs and backend development.
+                <br />
+                 Recently, I've started learning
+                <a href="" class="text-violet-600">Go</a> and I'm really looking
+                forward to implement it in my future projects.
             </p>
         </div>
-    </header>
-    <div id="header-main" class="h-40 md:h-20"></div>
-    <main
-        class="mx-auto mt-32 bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
-        id="about-me"
-    >
-        <div class="flex flex-col xl:flex-row justify-between items-center">
-            <div class="p-8 md:pr-20 pb-16">
-                <h2 class="text-4xl 3xl:text-5xl text-white text-left">
-                    About me
-                </h2>
-                <p class="text-xl 3xl:text-2xl pt-8">
-                    Hi, my name is Martin. I'm passionate about coding and
-                    learning new things.
-                    <br />
-                     I'm currently studying computer science at
-                    <a href="" class="text-violet-600">EPHEC</a>.
-                    <br />
-                    <br />
-                     I'm also a self-taught developer. I'm always looking for
-                    new challenges and opportunities to learn new things.
-                    <br />
-                    <br />
 
-                     My goal is to become a full-stack developer. But I particularly
-                    love APIs and backend development.
-                    <br />
-                     Recently, I've started learning
-                    <a href="" class="text-violet-600">Go</a> and I'm really
-                    looking forward to implement it in my future projects.
-                </p>
-            </div>
-
-            <img
-                src="/astro_on_computer.jpg"
-                class="md:mb-10 md:h-auto md:my-auto md:rounded-full 2xl:w-96 3xl:w-[32em] 2xl:my-0 2xl:mr-0 2xl:rounded-none md:w-60 xl:mr-16"
-            />
-        </div>
-    </main>
-    <section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
-        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
-            <Card
-                href="/projects"
-                title="My Projects "
-                body="Learn more about my projects and see them in action."
-            />
-            <Card
-                href="https://github.com/Martin-Hayot"
-                title="My Github profile "
-                body="Check out my Github profile and see what I'm working on."
-                target="_blank"
-            />
-            <Card
-                href="/blog"
-                title="My blog "
-                body="Explore a galaxy of blog posts on web development, APIs, and more."
-            />
-            <Card
-                href="/about"
-                title="About me "
-                body="Learn more about me and my journey as a developer."
-            />
-        </ul>
-    </section>
-    <Footer />
-</Layout>
+        <img
+            src="/astro_on_computer.jpg"
+            class="md:mb-10 md:h-auto md:my-auto md:rounded-full 2xl:w-96 3xl:w-[32em] 2xl:my-0 2xl:mr-0 2xl:rounded-none md:w-60 xl:mr-16"
+        />
+    </div>
+</main>
+<section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
+    <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
+        <Card
+            href="/projects"
+            title="My Projects "
+            body="Learn more about my projects and see them in action."
+        />
+        <Card
+            href="https://github.com/Martin-Hayot"
+            title="My Github profile "
+            body="Check out my Github profile and see what I'm working on."
+            target="_blank"
+        />
+        <Card
+            href="/blog"
+            title="My blog "
+            body="Explore a galaxy of blog posts on web development, APIs, and more."
+        />
+        <Card
+            href="/about"
+            title="About me "
+            body="Learn more about me and my journey as a developer."
+        />
+    </ul>
+</section>
+<Footer />
 
 <style>
-    @keyframes orbit {
+    @keyframes orbit-sm {
         from {
-            transform: rotate(0deg) translateX(13em) rotate(0deg);
+            transform: rotate(0deg) translateX(10em) rotate(0deg);
         }
         to {
-            transform: rotate(360deg) translateX(13em) rotate(-360deg);
+            transform: rotate(360deg) translateX(10em) rotate(-360deg);
+        }
+    }
+
+    @keyframes orbit-md {
+        from {
+            transform: rotate(0deg) translateX(12em) rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg) translateX(12em) rotate(-360deg);
         }
     }
 
     @keyframes orbit-lg {
+        from {
+            transform: rotate(0deg) translateX(15em) rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg) translateX(15em) rotate(-360deg);
+        }
+    }
+
+    @keyframes orbit-xl {
         from {
             transform: rotate(0deg) translateX(20em) rotate(0deg);
         }
@@ -128,16 +152,27 @@ import Footer from "../components/Footer.astro";
         }
     }
 
-    .animate-orbit {
-        animation: orbit 30s linear infinite;
+    .animate-orbit-sm {
+        animation: orbit-sm 30s linear infinite;
+    }
+
+    .animate-orbit-md {
+        animation: orbit-md 30s linear infinite;
     }
 
     .animate-orbit-lg {
         animation: orbit-lg 30s linear infinite;
     }
 
+    .animate-orbit-xl {
+        animation: orbit-xl 30s linear infinite;
+    }
+
     .animate-orbit:hover,
-    .animate-orbit-lg:hover {
+    .animate-orbit-sm:hover,
+    .animate-orbit-md:hover,
+    .animate-orbit-lg:hover,
+    .animate-orbit-xl:hover {
         animation-play-state: paused;
     }
     .link-card-grid {
