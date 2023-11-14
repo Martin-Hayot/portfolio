@@ -1,0 +1,86 @@
+---
+interface TechStack {
+    name: string;
+    icon: string;
+    href: string;
+}
+interface Props {
+    title: string;
+    body: string;
+    description: string;
+    href: string;
+    techStack: TechStack[];
+    linkToPreview?: string;
+    linkMessage?: string;
+}
+
+const {
+    href,
+    title,
+    body,
+    description,
+    techStack,
+    linkMessage,
+    linkToPreview,
+} = Astro.props;
+---
+
+<div
+    class="m-10 p-10 pb-5 text-white bg-neutral-900 bg-opacity-80 shadow-lg rounded-xl max-w-3xl"
+>
+    <div class="flex flex-col md:flex-row justify-between">
+        <div>
+            <h2 class="text-3xl mb-4">{title}</h2>
+            <p class="text-base">{body}</p>
+            <p class="text-base mt-5">{description}</p>
+            <h3 class="text-xl mt-8">Tech Stack :</h3>
+
+            <ul class="flex flex-row gap-2 my-5">
+                {
+                    techStack.map((tech) => (
+                        <li>
+                            <a
+                                href={tech.href}
+                                target="_blank"
+                                class=" cursor-pointer"
+                            >
+                                <img
+                                    src={tech.icon}
+                                    alt={tech.name}
+                                    class="h-6 w-6"
+                                />
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+            <a
+                href={linkToPreview}
+                class="block my-4 text-base hover:text-violet-500 duration-150 ease-in-out"
+                >{linkMessage}
+                <img
+                    src="/external-link-white.svg"
+                    alt="external link icon"
+                    class="inline h-4 w-4 ml-1 mb-1"
+                /></a
+            >
+            <a
+                href={href}
+                target="_blank"
+                rel="noreferrer noopener"
+                class="text-base hover:text-violet-500 duration-150 ease-in-out"
+                >View on GitHub <img
+                    src="/external-link-white.svg"
+                    alt="external link icon"
+                    class="inline h-4 w-4 ml-1 mb-1"
+                /></a
+            >
+        </div>
+
+        <img
+            src="/electric-city-homepage.png"
+            alt="Electric city homepage"
+            class="h-[35em] w-96 mb-5 md:mb-0"
+        />
+    </div>
+</div>

@@ -1,7 +1,59 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Project from "../components/Project.astro";
+import Footer from "../components/Footer.astro";
+import NavBar from "../components/NavBar.vue";
 ---
 
 <Layout title="My Projects">
-    <h1>My Projects</h1>
+    <NavBar client:load />
+    <h1 class="text-3xl pl-16 pt-10 font-semibold text-white">My Projects</h1>
+    <main class="h-screen mb-32">
+        <Project
+            href="https://github.com/Martin-Hayot/Projet-Dev-3"
+            title="Electric city"
+            body="Revamping Electric City's website for better visibility and client interaction. "
+            description="Adding client and admin interfaces for streamlined orders, appointments, and account management. Unique feature: direct online interaction, setting it apart from competitors. Email notifications for order updates."
+            linkToPreview="/calendar-preview"
+            linkMessage="The calendar I built for this project"
+            techStack={[
+                {
+                    name: "Vue3",
+                    icon: "/vue.svg",
+                    href: "https://vuejs.org",
+                },
+                {
+                    name: "Nuxt3",
+                    icon: "/nuxt.svg",
+                    href: "https://nuxt.com",
+                },
+                {
+                    name: "NodeJS/Express",
+                    icon: "/nodejs.svg",
+                    href: "https://expressjs.com",
+                },
+                {
+                    name: "Tailwindcss",
+                    icon: "/tailwindcss.svg",
+                    href: "https://tailwindcss.com",
+                },
+                {
+                    name: "PostgreSQL",
+                    icon: "/postgresql.svg",
+                    href: "https://www.postgresql.org",
+                },
+                {
+                    name: "Prisma ORM",
+                    icon: "/prisma.svg",
+                    href: "https://www.prisma.io",
+                },
+                {
+                    name: "Vuetify3",
+                    icon: "/vuetify.svg",
+                    href: "https://vuetifyjs.com/en/",
+                },
+            ]}
+        />
+    </main>
+    <Footer />
 </Layout>

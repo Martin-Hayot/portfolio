@@ -1,5 +1,57 @@
 ---
 import InConstruction from "../layouts/InConstruction.astro";
+import Layout from "../layouts/Layout.astro";
+import NavBar from "../components/NavBar.vue";
+import Footer from "../components/Footer.astro";
 ---
 
-<InConstruction />
+<Layout title="Contact me">
+    <NavBar client:load />
+    <main
+        class="h-screen flex flex-col-reverse lg:flex-row justify-evenly items-center -mt-20"
+    >
+        <div>
+            <div class="text-5xl font-bold text-gray-200 mb-4"></div>
+            <img
+                src="/astro_talking2.jpg"
+                alt=""
+                class="h-72 w-66 xl:h-96 xl:w-84"
+                style="clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);"
+            />
+        </div>
+        <div class="">
+            <div
+                class="w-full max-w-lg xl:max-w-2xl mt-20 lg:-mt-20 bg-neutral-900 rounded-lg shadow-md p-6"
+            >
+                <h2 class="text-2xl font-bold text-gray-200 mb-4">
+                    Contact Me
+                </h2>
+
+                <form class="flex flex-wrap">
+                    <input
+                        type="text"
+                        class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:mr-[2%]"
+                        placeholder="Full Name"
+                    />
+                    <input
+                        type="email"
+                        class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:ml-[2%]"
+                        placeholder="Email"
+                    />
+                    <textarea
+                        name="message"
+                        class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 md:mb-auto w-full md:w-full md:h-auto md:min-h-[100px] md:max-h-[100px] md:flex-grow md:flex-shrink md:flex-auto focus:bg-neutral-600 md:focus:outline-none focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-fastest"
+                        placeholder="Message"></textarea>
+
+                    <button
+                        type="submit"
+                        class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
+                    >
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <Footer />
+</Layout>
