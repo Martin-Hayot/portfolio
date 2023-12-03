@@ -101,8 +101,9 @@ const toggleMenu = () => {
 
 #menu {
     animation: menu-transition 0.5s ease-in-out;
-    overflow-x: hidden;
+    overflow-y: hidden;
     width: 100%;
+    height: 100vh;
 }
 
 .hamburger {
