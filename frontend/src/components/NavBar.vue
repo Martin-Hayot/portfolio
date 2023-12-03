@@ -3,8 +3,10 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 const menu = ref(null);
 const menuBtn = ref(null);
+const body = ref(null);
 
 onMounted(() => {
+    body.value = document.querySelector("body");
     menu.value = document.getElementById("menu");
     menuBtn.value = document.getElementById("menu-btn");
     menuBtn.value.addEventListener("click", toggleMenu);
@@ -12,6 +14,7 @@ onMounted(() => {
         menu.value.classList.toggle("hidden");
         menu.value.classList.toggle("flex");
         menuBtn.value.classList.toggle("open");
+        body.classList.toggle("overflow-y-hidden");
     });
 });
 
@@ -23,6 +26,7 @@ const toggleMenu = () => {
     menu.value.classList.toggle("hidden");
     menu.value.classList.toggle("flex");
     menuBtn.value.classList.toggle("open");
+    body.value.classList.toggle("overflow-y-hidden");
 };
 
 // listen on page navigation to close the menu
@@ -90,24 +94,18 @@ const toggleMenu = () => {
     0% {
         transform: translateX(100%);
         overflow-x: hidden;
-        overflow-y: hidden;
         width: 100vw;
-        height: 100vh;
     }
     100% {
         transform: translateX(0);
         overflow-x: hidden;
-        overflow-y: hidden;
         width: 100vw;
-        height: 100vh;
     }
 }
 
 #menu {
     animation: menu-transition 0.5s ease-in-out;
-    overflow-y: hidden;
     width: 100%;
-    height: 100vh;
 }
 
 .hamburger {
