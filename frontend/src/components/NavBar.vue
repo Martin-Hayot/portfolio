@@ -34,11 +34,11 @@ const toggleMenu = () => {
 
 <template>
     <nav
-        class="flex items-center text-2xl justify-between text-neutral-200 h-20 mx-10"
+        class="flex items-center text-2xl justify-between text-white h-20 mx-10"
     >
         <a
             href="/"
-            class="hover:scale-110 z-30 text-3xl transition-all duration-200 hover:text-white"
+            class="hover:scale-105 z-30 text-3xl ease-out transition-all duration-300"
             >Martin Hayot</a
         >
         <div
@@ -46,22 +46,18 @@ const toggleMenu = () => {
         >
             <a
                 href="/projects"
-                class="hover:scale-110 transition-all duration-200 hover:text-white"
+                class="hover:scale-105 transition-all duration-100"
                 >Projects</a
             >
-            <a
-                href="/blog"
-                class="hover:scale-110 transition-all duration-200 hover:text-white"
+            <a href="/blog" class="hover:scale-105 transition-all duration-100"
                 >Blog</a
             >
-            <a
-                href="/about"
-                class="hover:scale-110 transition-all duration-200 hover:text-white"
+            <a href="/about" class="hover:scale-105 transition-all duration-100"
                 >About me</a
             >
             <a
                 href="/contact"
-                class="hover:scale-110 transition-all duration-200 hover:text-white"
+                class="hover:scale-105 transition-all duration-100"
                 >Contact me</a
             >
         </div>
