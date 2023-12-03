@@ -27,13 +27,24 @@ import Footer from "../components/Footer.astro";
                     Contact Me
                 </h2>
 
-                <form class="flex flex-wrap">
+                <form
+                    method="POST"
+                    action="https://formsubmit.co/mart.hyt2002@gmail.com"
+                    class="flex flex-wrap"
+                >
                     <input
+                        name="name"
                         type="text"
                         class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:mr-[2%]"
                         placeholder="Full Name"
                     />
                     <input
+                        type="hidden"
+                        name="_next"
+                        value="https://martinhayot.com/thanks"
+                    />
+                    <input
+                        name="email"
                         type="email"
                         class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:ml-[2%]"
                         placeholder="Email"
