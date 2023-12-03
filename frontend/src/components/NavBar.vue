@@ -90,12 +90,16 @@ const toggleMenu = () => {
     0% {
         transform: translateX(100%);
         overflow-x: hidden;
+        overflow-y: hidden;
         width: 100vw;
+        height: 100vh;
     }
     100% {
         transform: translateX(0);
         overflow-x: hidden;
+        overflow-y: hidden;
         width: 100vw;
+        height: 100vh;
     }
 }
 
