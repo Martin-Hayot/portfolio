@@ -76,7 +76,7 @@ const toggleMenu = () => {
     <!--Mobile Menu -->
     <div
         id="menu"
-        class="absolute z-20 hidden top-0 bottom-0 left-0 flex-col self-end w-full min-h-screen py-1 pt-40 pl-12 space-y-3 text-xl text-white uppercase bg-black"
+        class="absolute z-20 hidden top-0 bottom-0 left-0 flex-col min-h-screen py-1 pt-40 pl-12 space-y-3 text-xl text-white uppercase bg-black"
     >
         <a href="/" class="hover:text-red-500">Home</a>
         <a href="/projects" class="hover:text-red-500">Projects</a>
@@ -89,17 +89,20 @@ const toggleMenu = () => {
 @keyframes menu-transition {
     0% {
         transform: translateX(100%);
+        overflow-x: hidden;
+        width: 100vw;
     }
     100% {
         transform: translateX(0);
+        overflow-x: hidden;
+        width: 100vw;
     }
 }
 
 #menu {
     animation: menu-transition 0.5s ease-in-out;
-    width: 100%; /* This will make the menu take up the full width of the screen */
-    margin-left: auto; /* These two lines will center the menu horizontally */
-    margin-right: auto;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .hamburger {

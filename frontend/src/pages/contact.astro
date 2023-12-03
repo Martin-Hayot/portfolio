@@ -3,8 +3,10 @@ import InConstruction from "../layouts/InConstruction.astro";
 import Layout from "../layouts/Layout.astro";
 import NavBar from "../components/NavBar.vue";
 import Footer from "../components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
 ---
 
+<ViewTransitions />
 <Layout title="Contact me">
     <NavBar client:load />
     <main
@@ -12,9 +14,12 @@ import Footer from "../components/Footer.astro";
     >
         <div>
             <div class="text-5xl font-bold text-gray-200 mt-16 md:mt-0"></div>
+
             <img
                 src="/astro_talking2.jpg"
-                alt=""
+                alt="astro talking"
+                decoding="async"
+                loading="lazy"
                 class="h-72 w-66 xl:h-96 xl:w-84"
                 style="clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);"
             />
@@ -66,3 +71,25 @@ import Footer from "../components/Footer.astro";
     </main>
     <Footer />
 </Layout>
+
+<script>
+    const image = document.querySelector("img");
+    image.addEventListener("load", () => {
+        image.classList.add("animate-fade-in");
+    });
+</script>
+
+<style>
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+</style>

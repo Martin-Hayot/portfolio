@@ -3,8 +3,10 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import Navbar from "../components/NavBar.vue";
 import Footer from "../components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
 ---
 
+<ViewTransitions />
 <Layout title={"Martin'space"}>
     <header class="mx-auto h-screen overscroll-y-none">
         <Navbar client:load />

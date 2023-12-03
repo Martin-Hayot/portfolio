@@ -18,9 +18,7 @@ const { title } = Astro.props;
         <ViewTransitions fallback="animate" />
         <title>{title}</title>
     </head>
-    <body
-        class="bg-neutral-950 text-sm text-neutral-400 overflow-x-hidden relative"
-    >
+    <body class="bg-neutral-950 text-sm w-screen text-neutral-400 relative">
         <div
             class="absolute -z-10 top-0 left-0 w-screen h-full bg-repeat bg-center bg-[url('/background.png')] bg-[length:500px_250px;]"
             id="background"
@@ -61,25 +59,9 @@ const { title } = Astro.props;
                     Courier New,
                     monospace;
             }
+            body {
+                overflow-x: hidden;
+            }
         </style>
-        <script type="text/javascript">
-            const background = document.getElementById("background");
-
-            let xValue = 0,
-                yValue = 0;
-
-            window.addEventListener("mousemove", (e) => {
-                xValue = e.clientX - window.innerWidth / 2;
-                background.style.transform = `translate(${xValue / 200}px)`;
-            });
-
-            window.addEventListener("popstate", () => {
-                window.location.reload();
-            });
-
-            document.addEventListener("astro:after-swap", (e) => {
-                document.location.reload();
-            });
-        </script>
     </body>
 </html>
