@@ -52,9 +52,7 @@ const toggleMenu = () => {
             <a href="/blog" class="hover:scale-105 transition-all duration-100"
                 >Blog</a
             >
-            <a href="/about" class="hover:scale-105 transition-all duration-100"
-                >About me</a
-            >
+
             <a
                 href="/contact"
                 class="hover:scale-105 transition-all duration-100"
@@ -80,7 +78,6 @@ const toggleMenu = () => {
     >
         <a href="/" class="hover:text-red-500">Home</a>
         <a href="/projects" class="hover:text-red-500">Projects</a>
-        <a href="/about" class="hover:text-red-500">About me</a>
         <a href="/contact" class="hover:text-red-500">Contact me</a>
     </div>
 </template>
