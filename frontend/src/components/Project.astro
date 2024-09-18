@@ -10,6 +10,7 @@ interface Props {
     description: string;
     href: string;
     techStack: TechStack[];
+    projectImg: string;
     linkToPreview?: string;
     linkMessage?: string;
 }
@@ -22,65 +23,84 @@ const {
     techStack,
     linkMessage,
     linkToPreview,
+    projectImg,
 } = Astro.props;
 ---
 
 <div
-    class="m-10 p-10 pb-5 text-white bg-neutral-900 bg-opacity-80 shadow-lg rounded-xl max-w-3xl"
+    class="m-10 p-10 text-white bg-neutral-900 bg-opacity-90 shadow-lg hover:shadow-2xl rounded-xl min-w-fit max-w-3xl transition-shadow duration-200 relative"
 >
-    <div class="flex flex-col md:flex-row justify-between">
-        <div>
-            <h2 class="text-3xl mb-4">{title}</h2>
-            <p class="text-base">{body}</p>
-            <p class="text-base mt-5">{description}</p>
-            <h3 class="text-xl mt-8">Tech Stack :</h3>
+    <div
+        class="flex flex-col space-y-6 lg:flex-row lg:justify-between justify-center"
+    >
+        <div class="flex gap-x-2 flex-col">
+            <h2
+                class="text-4xl mb-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-indigo-500"
+            >
+                {title}
+            </h2>
+            <p class="text-base hidden md:block">{body}</p>
+            <p class="text-base mt-5 max-w-xl text-gray-300 hidden md:block">
+                {description}
+            </p>
+            <h3 class="text-xl mt-8 hidden md:block">Tech Stack:</h3>
 
-            <ul class="flex flex-row gap-2 my-5">
+            <ul class="flex flex-row gap-4 my-5">
                 {
                     techStack.map((tech) => (
-                        <li>
+                        <li class="relative group">
                             <a
                                 href={tech.href}
                                 target="_blank"
-                                class=" cursor-pointer"
+                                class="cursor-pointer transition-transform transform hover:scale-110"
                             >
                                 <img
                                     src={tech.icon}
                                     alt={tech.name}
                                     class="h-6 w-6"
                                 />
+                                <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    {tech.name}
+                                </span>
                             </a>
                         </li>
                     ))
                 }
             </ul>
-            <a
-                href={linkToPreview}
-                class="block my-4 text-base hover:text-violet-500 duration-150 ease-in-out"
-                >{linkMessage}
-                <img
-                    src="/external-link-white.svg"
-                    alt="external link icon"
-                    class="inline h-4 w-4 ml-1 mb-1"
-                /></a
-            >
+            <div>
+                {
+                    linkToPreview && linkMessage && (
+                        <a
+                            href={linkToPreview}
+                            class="block my-4 text-base hover:text-violet-500 duration-150 ease-in-out"
+                        >
+                            {linkMessage}
+                            <img
+                                src="/external-link-white.svg"
+                                alt="external link icon"
+                                class="inline h-4 w-4 ml-1 mb-1"
+                            />
+                        </a>
+                    )
+                }
+            </div>
+
             <a
                 href={href}
                 target="_blank"
                 rel="noreferrer noopener"
                 class="text-base hover:text-violet-500 duration-150 ease-in-out"
-                >View on GitHub <img
+            >
+                View my repository
+                <img
                     src="/external-link-white.svg"
                     alt="external link icon"
                     class="inline h-4 w-4 ml-1 mb-1"
-                /></a
-            >
+                />
+            </a>
         </div>
-
-        <img
-            src="/electric-city-homepage.png"
-            alt="Electric city homepage"
-            class="md:h-[35em] md:w-96 mb-5 mt-5 md:mb-0"
-        />
+        <div class="w-full flex justify-center lg:justify-end">
+            <img src={projectImg} alt="Project image" class="w-[35em]" />
+        </div>
     </div>
 </div>

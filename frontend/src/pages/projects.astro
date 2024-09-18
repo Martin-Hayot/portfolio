@@ -12,52 +12,96 @@ import { ViewTransitions } from "astro:transitions";
     <h1 class="text-3xl md:pl-16 pt-10 font-semibold text-white text-center">
         My Projects
     </h1>
-    <main class="h-screen mb-80 md:mb-44">
-        <Project
-            href="https://github.com/Martin-Hayot/Projet-Dev-3"
-            title="Electric city"
-            body="Revamping Electric City's website for better visibility and client interaction. "
-            description="Adding client and admin interfaces for streamlined orders, appointments, and account management. Unique feature: direct online interaction, setting it apart from competitors. Email notifications for order updates."
-            linkToPreview="/calendar-preview"
-            linkMessage="The calendar I built for this project"
-            techStack={[
-                {
-                    name: "Vue3",
-                    icon: "/vue.svg",
-                    href: "https://vuejs.org",
-                },
-                {
-                    name: "Nuxt3",
-                    icon: "/nuxt.svg",
-                    href: "https://nuxt.com",
-                },
-                {
-                    name: "NodeJS/Express",
-                    icon: "/nodejs.svg",
-                    href: "https://expressjs.com",
-                },
-                {
-                    name: "Tailwindcss",
-                    icon: "/tailwindcss.svg",
-                    href: "https://tailwindcss.com",
-                },
-                {
-                    name: "PostgreSQL",
-                    icon: "/postgresql.svg",
-                    href: "https://www.postgresql.org",
-                },
-                {
-                    name: "Prisma ORM",
-                    icon: "/prisma.svg",
-                    href: "https://www.prisma.io",
-                },
-                {
-                    name: "Vuetify3",
-                    icon: "/vuetify.svg",
-                    href: "https://vuetifyjs.com/en/",
-                },
-            ]}
-        />
+    <main class="flex h-full flex-col items-center justify-center">
+        <div class="w-full flex flex-row flex-wrap justify-center">
+            <Project
+                href="https://gitlab.com/Martin-Hayot/vale-garage"
+                title="Vale Garage"
+                body="B2B & B2C platform for buying cars"
+                description="A platform for buying cars, with a focus on B2B and B2C sales. Features include a car catalog, user authentication, like system. Admins can manage users, cars, and offers. Users can view cars and contact Vale Garage for more information."
+                projectImg="/vale-garage-homepage.png"
+                linkToPreview="https://vale-garage.com"
+                linkMessage="Check out the live site"
+                techStack={[
+                    {
+                        name: "Next.js",
+                        icon: "/nextjs.svg",
+                        href: "https://nextjs.org",
+                    },
+                    {
+                        name: "TypeScript",
+                        icon: "/typescript.png",
+                        href: "https://www.typescriptlang.org",
+                    },
+                    {
+                        name: "Tailwindcss",
+                        icon: "/tailwindcss.svg",
+                        href: "https://tailwindcss.com",
+                    },
+                    {
+                        name: "PostgreSQL",
+                        icon: "/postgresql.svg",
+                        href: "https://www.postgresql.org",
+                    },
+                    {
+                        name: "Prisma ORM",
+                        icon: "/prisma.svg",
+                        href: "https://www.prisma.io",
+                    },
+                    {
+                        name: "ShadcnUI",
+                        icon: "/shadcnui.png",
+                        href: "https://ui.shadcn.com",
+                    },
+                ]}
+            />
+            <Project
+                href="https://github.com/Martin-Hayot/Projet-Dev-3"
+                title="Electric city"
+                body="Revamping Electric City's website for better visibility and client interaction. "
+                description="Adding client and admin interfaces for streamlined orders, appointments, and account management. Unique feature: direct online interaction, setting it apart from competitors. Email notifications for order updates."
+                projectImg="/electric-city-homepage.png"
+                linkToPreview="/calendar-preview"
+                linkMessage="The calendar I built for this project"
+                techStack={[
+                    {
+                        name: "Vue3",
+                        icon: "/vue.svg",
+                        href: "https://vuejs.org",
+                    },
+                    {
+                        name: "Nuxt3",
+                        icon: "/nuxt.svg",
+                        href: "https://nuxt.com",
+                    },
+                    {
+                        name: "NodeJS/Express",
+                        icon: "/nodejs.svg",
+                        href: "https://expressjs.com",
+                    },
+                    {
+                        name: "Tailwindcss",
+                        icon: "/tailwindcss.svg",
+                        href: "https://tailwindcss.com",
+                    },
+                    {
+                        name: "PostgreSQL",
+                        icon: "/postgresql.svg",
+                        href: "https://www.postgresql.org",
+                    },
+                    {
+                        name: "Prisma ORM",
+                        icon: "/prisma.svg",
+                        href: "https://www.prisma.io",
+                    },
+                    {
+                        name: "Vuetify3",
+                        icon: "/vuetify.svg",
+                        href: "https://vuetifyjs.com/en/",
+                    },
+                ]}
+            />
+        </div>
     </main>
     <Footer />
 </Layout>
