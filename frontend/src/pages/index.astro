@@ -7,7 +7,7 @@ import StarField from "../components/StarField";
 ---
 
 <Layout title={"Martin'space"}>
-    <header class="mx-auto h-screen overflow-x-hidden">
+    <header class="h-screen overflow-x-hidden">
         <div class="relative">
             <StarField
                 transition:name="starfield"
@@ -29,7 +29,7 @@ import StarField from "../components/StarField";
         <Navbar transition:persist transition:name="navbar" />
         <div class="flex flex-col mx-2 lg:flex-row">
             <h1
-                class="text-6xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-20 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10"
+                class="text-6xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-10 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10"
             >
                 <span>Welcome to</span><br />
                 <span
@@ -38,7 +38,7 @@ import StarField from "../components/StarField";
                 >
             </h1>
             <div
-                class="flex relative mx-auto mt-24 md:mt-32 lg:mt-60 3xl:mt-72"
+                class="flex relative mx-auto mt-20 md:mt-32 lg:mt-60 3xl:mt-72"
             >
                 <img
                     src="astro_earth.png"
@@ -72,84 +72,92 @@ import StarField from "../components/StarField";
             scroll down
         </p>
     </div>
-</Layout>
-<div id="header-main" class="h-40 md:h-20"></div>
-<main
-    class="mx-auto mt-32 bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
-    id="about-me"
->
-    <div class="flex flex-col xl:flex-row justify-between items-center">
-        <div class="p-8 md:pr-20 pb-16">
-            <h2 class="text-4xl 3xl:text-5xl text-white text-left">About me</h2>
-            <p class="text-xl 3xl:text-2xl pt-8">
-                Hi, my name is Martin. I'm passionate about coding and learning
-                new things.
-                <br />
-                I'm currently studying computer science at
-                <a
-                    href="https://ephec.be"
-                    target="_blank"
-                    class="text-violet-600">EPHEC</a
-                >.
-                <br />
-                <br />
-                I'm also a self-taught developer. I'm always looking for new challenges
-                and opportunities to learn new things.
-                <br />
-                <br />
-
-                My goal is to become a full-stack developer. But I particularly
-                love APIs and backend development.
-                <br />
-                Recently, I've been using
-                <a href="https://go.dev" target="_blank" class="text-violet-600"
-                    >Go</a
-                > a lot and I'm really looking forward to implement it in my future
-                projects.
-            </p>
-        </div>
-
-        <img
-            src="/astro_on_computer.jpg"
-            class="md:mb-10 md:h-auto md:rounded-full 2xl:w-[32em] 3xl:w-[32em] 2xl:my-0 2xl:mr-0 2xl:rounded-none md:w-60 xl:mr-16 2xl:h-[32em]"
-        />
-    </div>
-</main>
-<section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
-    <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
-        <Card
-            href="/projects"
-            title="My Projects "
-            body="Learn more about my projects and see them in action."
-        />
-        <Card
-            href="https://github.com/Martin-Hayot"
-            title="My Github profile "
-            body="Check out my Github profile and see what I'm working on."
-            target="_blank"
-        />
-        <Card
-            href="/blog"
-            title="My blog "
-            body="Explore a galaxy of blog posts on web development, APIs, and more."
-        />
-        <Card
-            href="https://www.linkedin.com/in/martin-hayot-21988723b/"
-            title="LinkedIn"
-            body="Learn more about me and my journey as a developer."
-        />
-    </ul>
-</section>
-
-<div class="w-full flex justify-center">
-    <a
-        download
-        href="HAYOT_Martin_CV.pdf"
-        class="bg-white mb-16 py-4 px-8 rounded-full shadow-lg text-lg font-bold text-neutral-900 hover:bg-violet-950 hover:text-white transition duration-300 ease-in-out"
-        >Download <span class="font-bold">CV</span></a
+    <div
+        id="header-main"
+        class="h-40 md:h-20 from-transparent via-black to-transparent"
     >
-</div>
-<Footer />
+    </div>
+    <main
+        class="mx-auto mt-32 bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
+        id="about-me"
+    >
+        <div class="flex flex-col xl:flex-row justify-between items-center">
+            <div class="p-8 md:pr-20 pb-16">
+                <h2 class="text-4xl 3xl:text-5xl text-white text-left">
+                    About me
+                </h2>
+                <p class="text-xl 3xl:text-2xl pt-8">
+                    Hi, my name is Martin. I'm passionate about coding and
+                    learning new things.
+                    <br />
+                    I'm currently studying computer science at
+                    <a
+                        href="https://ephec.be"
+                        target="_blank"
+                        class="text-violet-600">EPHEC</a
+                    >.
+                    <br />
+                    <br />
+                    I'm also a self-taught developer. I'm always looking for new
+                    challenges and opportunities to learn new things.
+                    <br />
+                    <br />
+
+                    My goal is to become a full-stack developer. But I
+                    particularly love APIs and backend development.
+                    <br />
+                    Recently, I've been using
+                    <a
+                        href="https://go.dev"
+                        target="_blank"
+                        class="text-violet-600">Go</a
+                    > a lot and I'm really looking forward to implement it in my
+                    future projects.
+                </p>
+            </div>
+
+            <img
+                src="/astro_on_computer.jpg"
+                class="md:mb-10 md:h-auto md:rounded-full 2xl:w-[32em] 3xl:w-[32em] 2xl:my-0 2xl:mr-0 2xl:rounded-none md:w-60 xl:mr-16 2xl:h-[32em]"
+            />
+        </div>
+    </main>
+    <section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
+            <Card
+                href="/projects"
+                title="My Projects "
+                body="Learn more about my projects and see them in action."
+            />
+            <Card
+                href="https://github.com/Martin-Hayot"
+                title="My Github profile "
+                body="Check out my Github profile and see what I'm working on."
+                target="_blank"
+            />
+            <Card
+                href="/blog"
+                title="My blog "
+                body="Explore a galaxy of blog posts on web development, APIs, and more."
+            />
+            <Card
+                href="https://www.linkedin.com/in/martin-hayot-21988723b/"
+                title="LinkedIn"
+                body="Learn more about me and my journey as a developer."
+            />
+        </ul>
+    </section>
+
+    <div class="w-full flex justify-center">
+        <a
+            download
+            href="HAYOT_Martin_CV.pdf"
+            class="bg-white mb-16 py-4 px-8 rounded-full shadow-lg text-lg font-bold text-neutral-900 hover:bg-violet-950 hover:text-white transition duration-300 ease-in-out"
+            >Download <span class="font-bold">CV</span></a
+        >
+    </div>
+    <Footer />
+</Layout>
 
 <style>
     @keyframes orbit-sm {
