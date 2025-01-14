@@ -1,18 +1,37 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
-import Navbar from "../components/NavBar.vue";
+import Navbar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
-import { ViewTransitions } from "astro:transitions";
+import StarField from "../components/StarField";
 ---
 
-<ViewTransitions />
 <Layout title={"Martin'space"}>
-    <header class="mx-auto h-screen overscroll-y-none">
-        <Navbar client:load />
-        <div class="flex flex-col lg:flex-row">
+    <header
+        class="mx-auto h-screen overflow-x-hidden from-transparent to-black bg-gradient-to-b"
+    >
+        <div class="relative overscroll-y-none">
+            <StarField
+                transition:name="starfield"
+                transition:persist
+                transition:animate="fade"
+                client:load
+            />
+            <div class="absolute w-full h-screen">
+                <div
+                    class="absolute top-0 left-0 h-[134px] w-[134px] md:h-[200px] md:w-[200px] lg:w-[300px] lg:h-[300px] 3xl:w-[380px] 3xl:h-[380px] rounded-full overflow-x-hidden bg-orange-500 blur-[150px] md:blur-[350px] opacity-70"
+                >
+                </div>
+                <div
+                    class="absolute bottom-0 right-20 h-[134px] w-[134px] md:w-[300px] md:h-[300px] 3xl:w-[380px] 3xl:h-[380px] rounded-full bg-violet-500 blur-[150px] md:blur-[350px] opacity-70"
+                >
+                </div>
+            </div>
+        </div>
+        <Navbar transition:persist transition:name="navbar" />
+        <div class="flex flex-col mx-2 lg:flex-row">
             <h1
-                class="text-7xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-20 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10"
+                class="text-6xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-20 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10"
             >
                 <span>Welcome to</span><br />
                 <span
@@ -20,7 +39,9 @@ import { ViewTransitions } from "astro:transitions";
                     >Martin's space</span
                 >
             </h1>
-            <div class="flex relative mx-auto mt-32 lg:mt-60 3xl:mt-72">
+            <div
+                class="flex relative mx-auto mt-24 md:mt-32 lg:mt-60 3xl:mt-72"
+            >
                 <img
                     src="astro_earth.png"
                     class="h-48 w-48 md:w-60 md:h-60 3xl:w-80 3xl:h-80"
@@ -45,7 +66,7 @@ import { ViewTransitions } from "astro:transitions";
         </div>
     </header>
     <div
-        class="cursor-pointer hidden lg:block -mt-24 3xl:-mt-32"
+        class="cursor-pointer hidden lg:block -mt-32 3xl:-mt-32"
         onclick="{document.getElementById('header-main').scrollIntoView({behavior: 'smooth'});}"
     >
         <div class="loader mx-auto"></div>
