@@ -148,21 +148,7 @@ export default function Starfield(props: Props) {
     return (
         <canvas
             id="starfield"
-            style={{
-                padding: 0,
-                margin: 0,
-                position: "absolute",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                opacity: 1,
-                maxHeight: "100vh",
-                maxWidth: "100vw",
-                overflowY: "hidden",
-                pointerEvents: "none",
-                mixBlendMode: "screen",
-            }}
+            className="p-0 m-0 absolute inset-0 opacity-100 max-h-screen max-w-screen overflow-hidden pointer-events-none"
         />
     );
 }
