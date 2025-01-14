@@ -1,14 +1,14 @@
 ---
 import InConstruction from "../layouts/InConstruction.astro";
 import Layout from "../layouts/Layout.astro";
-import NavBar from "../components/NavBar.vue";
+import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
 ---
 
 <ViewTransitions />
 <Layout title="Contact me">
-    <NavBar client:load />
+    <NavBar />
     <main
         class="h-screen w-[90%] mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center lg:-mt-10 mb-40"
     >
