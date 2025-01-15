@@ -1,5 +1,7 @@
 ---
 import CommonHead from "../components/CommonHead.astro";
+import Loader from "../components/Loader";
+import "@/styles/globals.css";
 ---
 
 <!doctype html>
@@ -16,6 +18,7 @@ import CommonHead from "../components/CommonHead.astro";
         transition:animate="none"
         class="bg-neutral-950 text-sm text-neutral-400 overflow-x-hidden"
     >
+        <Loader client:load />
         <slot />
         <style is:global>
             :root {
@@ -31,6 +34,7 @@ import CommonHead from "../components/CommonHead.astro";
             }
             html {
                 font-family: system-ui, sans-serif;
+                scrollbar-width: none;
             }
             code {
                 font-family:

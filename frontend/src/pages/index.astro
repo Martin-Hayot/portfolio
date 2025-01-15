@@ -1,163 +1,115 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import Navbar from "../components/NavBar.astro";
-import Footer from "../components/Footer.astro";
-import StarField from "../components/StarField";
+import Layout from "@/layouts/Layout.astro";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import "@/styles/globals.css";
 ---
 
 <Layout title={"Martin'space"}>
-    <header class="h-screen overflow-x-hidden">
-        <div class="relative">
-            <StarField
-                transition:name="starfield"
-                transition:persist
-                transition:animate="fade"
-                client:load
-            />
-            <div class="absolute w-full h-screen">
-                <div
-                    class="absolute top-0 left-0 h-[134px] w-[134px] md:h-[200px] md:w-[200px] lg:w-[300px] lg:h-[300px] 3xl:w-[380px] 3xl:h-[380px] rounded-full bg-orange-500 blur-[150px] md:blur-[350px] opacity-70"
-                >
-                </div>
-                <div
-                    class="absolute bottom-0 right-20 h-[134px] w-[134px] md:w-[300px] md:h-[300px] 3xl:w-[380px] 3xl:h-[380px] rounded-full bg-violet-500 blur-[150px] md:blur-[350px] opacity-70"
-                >
-                </div>
-            </div>
-        </div>
-        <Navbar transition:persist transition:name="navbar" />
-        <div class="flex flex-col mx-2 lg:flex-row">
-            <h1
-                class="text-6xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-10 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10"
-            >
-                <span>Welcome to</span><br />
-                <span
-                    class="lg:pl-20 bg-gradient-to-br from-orange-500 from-10% to-purple-600 inline-block text-transparent bg-clip-text"
-                    >Martin's space</span
-                >
-            </h1>
-            <div
-                class="flex relative mx-auto mt-20 md:mt-32 lg:mt-60 3xl:mt-72"
-            >
-                <img
-                    src="astro_earth.png"
-                    class="h-48 w-48 md:w-60 md:h-60 3xl:w-80 3xl:h-80"
-                />
-                <img
-                    src="martin.jpeg"
-                    class="absolute w-16 h-16 left-16 top-16 rounded-full animate-orbit-sm z-0 md:hidden cursor-pointer"
-                />
-                <img
-                    src="martin.jpeg"
-                    class="hidden absolute w-20 h-20 left-20 top-20 md:block xl:hidden rounded-full animate-orbit-md z-0 cursor-pointer"
-                />
-                <img
-                    src="martin.jpeg"
-                    class="hidden xl:block 3xl:hidden w-24 h-24 animate-orbit-lg rounded-full absolute left-20 top-20 z-0 cursor-pointer"
-                />
-                <img
-                    src="martin.jpeg"
-                    class="hidden 3xl:block w-24 h-24 animate-orbit-xl rounded-full absolute left-24 top-24 z-0 cursor-pointer"
-                />
-            </div>
-        </div>
-    </header>
-    <div
-        class="cursor-pointer hidden lg:block -mt-32 3xl:-mt-32"
-        onclick="{document.getElementById('header-main').scrollIntoView({behavior: 'smooth'});}"
-    >
-        <div class="loader mx-auto"></div>
-        <p class="hidden z-40 md:block md:text-xl md:text-center md:mt-2">
-            scroll down
-        </p>
-    </div>
-    <div
-        id="header-main"
-        class="h-40 md:h-20 from-transparent via-black to-transparent"
-    >
-    </div>
-    <main
-        class="mx-auto mt-32 bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
-        id="about-me"
-    >
-        <div class="flex flex-col xl:flex-row justify-between items-center">
-            <div class="p-8 md:pr-20 pb-16">
-                <h2 class="text-4xl 3xl:text-5xl text-white text-left">
-                    About me
-                </h2>
-                <p class="text-xl 3xl:text-2xl pt-8">
-                    Hi, my name is Martin. I'm passionate about coding and
-                    learning new things.
-                    <br />
-                    I'm currently studying computer science at
-                    <a
-                        href="https://ephec.be"
-                        target="_blank"
-                        class="text-violet-600">EPHEC</a
-                    >.
-                    <br />
-                    <br />
-                    I'm also a self-taught developer. I'm always looking for new
-                    challenges and opportunities to learn new things.
-                    <br />
-                    <br />
+    <HeroSection client:load />
 
-                    My goal is to become a full-stack developer. But I
-                    particularly love APIs and backend development.
-                    <br />
-                    Recently, I've been using
-                    <a
-                        href="https://go.dev"
-                        target="_blank"
-                        class="text-violet-600">Go</a
-                    > a lot and I'm really looking forward to implement it in my
-                    future projects.
-                </p>
-            </div>
-
-            <img
-                src="/astro_on_computer.jpg"
-                class="md:mb-10 md:h-auto md:rounded-full 2xl:w-[32em] 3xl:w-[32em] 2xl:my-0 2xl:mr-0 2xl:rounded-none md:w-60 xl:mr-16 2xl:h-[32em]"
-            />
-        </div>
-    </main>
-    <section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
-        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
-            <Card
-                href="/projects"
-                title="My Projects "
-                body="Learn more about my projects and see them in action."
-            />
-            <Card
-                href="https://github.com/Martin-Hayot"
-                title="My Github profile "
-                body="Check out my Github profile and see what I'm working on."
-                target="_blank"
-            />
-            <Card
-                href="/blog"
-                title="My blog "
-                body="Explore a galaxy of blog posts on web development, APIs, and more."
-            />
-            <Card
-                href="https://www.linkedin.com/in/martin-hayot-21988723b/"
-                title="LinkedIn"
-                body="Learn more about me and my journey as a developer."
-            />
-        </ul>
-    </section>
-
-    <div class="w-full flex justify-center">
-        <a
-            download
-            href="HAYOT_Martin_CV.pdf"
-            class="bg-white mb-16 py-4 px-8 rounded-full shadow-lg text-lg font-bold text-neutral-900 hover:bg-violet-950 hover:text-white transition duration-300 ease-in-out"
-            >Download <span class="font-bold">CV</span></a
-        >
+    <div id="about">
+        <AboutSection client:load />
     </div>
-    <Footer />
 </Layout>
+
+<section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
+    <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
+        <Card
+            href="/projects"
+            title="My Projects "
+            body="Learn more about my projects and see them in action."
+        />
+        <Card
+            href="https://github.com/Martin-Hayot"
+            title="My Github profile "
+            body="Check out my Github profile and see what I'm working on."
+            target="_blank"
+        />
+        <Card
+            href="/blog"
+            title="My blog "
+            body="Explore a galaxy of blog posts on web development, APIs, and more."
+        />
+        <Card
+            href="https://www.linkedin.com/in/martin-hayot-21988723b/"
+            title="LinkedIn"
+            body="Learn more about me and my journey as a developer."
+        />
+    </ul>
+</section>
+
+<section
+    class="w-[90%] mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center lg:-mt-10 mb-40"
+>
+    <div>
+        <div class="text-5xl font-bold text-gray-200 mt-16 md:mt-0"></div>
+
+        <img
+            src="/astro_talking2.jpg"
+            alt="astro talking"
+            decoding="async"
+            loading="lazy"
+            class="h-72 w-66 xl:h-96 xl:w-84"
+            style="clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);"
+        />
+    </div>
+    <div class="">
+        <div
+            class="w-full max-w-lg xl:max-w-2xl mt-20 lg:-mt-20 bg-neutral-900 rounded-lg shadow-md p-6"
+        >
+            <h2 class="text-2xl font-bold text-gray-200 mb-4">Contact Me</h2>
+
+            <form
+                method="POST"
+                action="https://formsubmit.co/mart.hyt2002@gmail.com"
+                class="flex flex-wrap"
+            >
+                <input
+                    name="name"
+                    type="text"
+                    class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:mr-[2%]"
+                    placeholder="Full Name"
+                />
+                <input
+                    type="hidden"
+                    name="_next"
+                    value="https://martinhayot.com/thanks"
+                />
+                <input
+                    name="email"
+                    type="email"
+                    class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:ml-[2%]"
+                    placeholder="Email"
+                />
+                <textarea
+                    name="message"
+                    class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 md:mb-auto w-full md:w-full md:h-auto md:min-h-[100px] md:max-h-[100px] md:flex-grow md:flex-shrink md:flex-auto focus:bg-neutral-600 md:focus:outline-none focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-fastest"
+                    placeholder="Message"></textarea>
+
+                <button
+                    type="submit"
+                    class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<div class="w-full flex justify-center">
+    <a
+        download
+        href="HAYOT_Martin_CV.pdf"
+        class="bg-white mb-16 py-4 px-8 rounded-full shadow-lg text-lg font-bold text-neutral-900 hover:bg-violet-950 hover:text-white transition duration-300 ease-in-out"
+        >Download <span class="font-bold">CV</span></a
+    >
+</div>
+
+<Footer />
 
 <style>
     @keyframes orbit-sm {
@@ -224,31 +176,6 @@ import StarField from "../components/StarField";
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
         padding: 0;
-    }
-
-    .loader {
-        display: block;
-        width: 50px;
-        height: 50px;
-        position: relative;
-    }
-
-    .loader:before,
-    .loader:after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: #fff;
-        transform: translate(-50%, -100%) scale(0);
-        animation: push_401 2s infinite linear;
-    }
-
-    .loader:after {
-        animation-delay: 1s;
     }
 
     @keyframes push_401 {

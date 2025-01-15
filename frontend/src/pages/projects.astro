@@ -2,12 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import Project from "../components/Project.astro";
 import Footer from "../components/Footer.astro";
-import NavBar from "../components/NavBar.astro";
+import NavBar from "../components/navigation/NavBar";
 import { ViewTransitions } from "astro:transitions";
 ---
 
 <Layout title="My Projects">
-    <NavBar transition:name="navbar" />
+    <NavBar transition:name="navbar" client:load />
     <h1 class="text-3xl md:pl-16 pt-10 font-semibold text-white text-center">
         My Projects
     </h1>

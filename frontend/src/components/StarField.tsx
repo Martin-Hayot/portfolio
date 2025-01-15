@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import React, { useEffect } from "react";
 
 interface Props {
@@ -146,7 +147,9 @@ export default function Starfield(props: Props) {
     }, [starColor, backgroundColor, speedFactor, starCount]);
 
     return (
-        <canvas
+        <motion.canvas
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             id="starfield"
             className="p-0 m-0 absolute inset-0 opacity-100 max-h-screen max-w-screen overflow-hidden pointer-events-none"
         />
