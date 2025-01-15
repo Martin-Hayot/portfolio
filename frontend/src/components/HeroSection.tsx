@@ -1,10 +1,25 @@
 import StarField from "./StarField";
 import Navbar from "./navigation/NavBar";
 import "./HeroSection.css";
+import { useScroll, useSpring, useTransform } from "motion/react";
+import { useEffect } from "react";
+import { motion } from "motion/react";
 
 const HeroSection = () => {
+    const { scrollY } = useScroll();
+
+    // Parallax translation
+    const translateY = useTransform(scrollY, [0, 750], [0, -1000]);
+    const opacity = useTransform(scrollY, [0, 800], [1, 0]);
+
     return (
-        <div>
+        <motion.div
+            className="h-screen sticky top-0 w-full z-10"
+            style={{
+                translateY: translateY,
+                opacity: opacity,
+            }}
+        >
             <header className="h-screen overflow-x-hidden">
                 <div className="relative">
                     <StarField />
@@ -29,19 +44,19 @@ const HeroSection = () => {
                             className="h-48 w-48 md:w-60 md:h-60 3xl:w-80 3xl:h-80"
                         />
                         <img
-                            src="martin.jpeg"
+                            src="martin-circle.jpg"
                             className="absolute w-16 h-16 left-16 top-16 rounded-full animate-orbit-sm z-0 md:hidden cursor-pointer"
                         />
                         <img
-                            src="martin.jpeg"
+                            src="martin-circle.jpg"
                             className="hidden absolute w-20 h-20 left-20 top-20 md:block xl:hidden rounded-full animate-orbit-md z-0 cursor-pointer"
                         />
                         <img
-                            src="martin.jpeg"
+                            src="martin-circle.jpg"
                             className="hidden xl:block 3xl:hidden w-24 h-24 animate-orbit-lg rounded-full absolute left-20 top-20 z-0 cursor-pointer"
                         />
                         <img
-                            src="martin.jpeg"
+                            src="martin-circle.jpg"
                             className="hidden 3xl:block w-24 h-24 animate-orbit-xl rounded-full absolute left-24 top-24 z-0 cursor-pointer"
                         />
                     </div>
@@ -60,7 +75,7 @@ const HeroSection = () => {
                     scroll down
                 </p>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

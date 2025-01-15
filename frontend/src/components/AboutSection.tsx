@@ -12,14 +12,17 @@ function useParallax(value: MotionValue<number>, distance: number) {
 }
 
 const AboutSection = () => {
-    const ref = useRef(null);
-    const { scrollYProgress } = useScroll({ target: ref });
-    const y = useParallax(scrollYProgress, 300);
-
     return (
-        <motion.div className="w-full mt-32 flex flex-col justify-center items-center z-10">
+        <motion.div
+            initial={{ scale: 0.95 }}
+            whileInView={{
+                scale: 1,
+                transition: { duration: 0.5 },
+            }}
+            className="w-full flex flex-col justify-center items-center z-10"
+        >
             <main
-                className="mx-auto mt-20 bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
+                className="mx-auto bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
                 id="about-me"
             >
                 <div className="flex flex-col xl:flex-row justify-between items-center">

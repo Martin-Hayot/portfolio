@@ -10,36 +10,35 @@ import "@/styles/globals.css";
 <Layout title={"Martin'space"}>
     <HeroSection client:load />
 
-    <div id="about">
+    <div class="lg:pt-20" id="about">
         <AboutSection client:load />
     </div>
+    <section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
+            <Card
+                href="/projects"
+                title="My Projects "
+                body="Learn more about my projects and see them in action."
+            />
+            <Card
+                href="https://github.com/Martin-Hayot"
+                title="My Github profile "
+                body="Check out my Github profile and see what I'm working on."
+                target="_blank"
+            />
+            <Card
+                href="/blog"
+                title="My blog "
+                body="Explore a galaxy of blog posts on web development, APIs, and more."
+            />
+            <Card
+                href="https://www.linkedin.com/in/martin-hayot-21988723b/"
+                title="LinkedIn"
+                body="Learn more about me and my journey as a developer."
+            />
+        </ul>
+    </section>
 </Layout>
-
-<section class="w-[80%] mx-auto mt-40 mb-60" id="Cards">
-    <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 gap-8 p-0">
-        <Card
-            href="/projects"
-            title="My Projects "
-            body="Learn more about my projects and see them in action."
-        />
-        <Card
-            href="https://github.com/Martin-Hayot"
-            title="My Github profile "
-            body="Check out my Github profile and see what I'm working on."
-            target="_blank"
-        />
-        <Card
-            href="/blog"
-            title="My blog "
-            body="Explore a galaxy of blog posts on web development, APIs, and more."
-        />
-        <Card
-            href="https://www.linkedin.com/in/martin-hayot-21988723b/"
-            title="LinkedIn"
-            body="Learn more about me and my journey as a developer."
-        />
-    </ul>
-</section>
 
 <section
     class="w-[90%] mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center lg:-mt-10 mb-40"
