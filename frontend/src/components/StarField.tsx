@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
-import React, { useEffect } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import React, { memo, useEffect, useRef } from "react";
 
 interface Props {
     speedFactor?: number;
@@ -8,8 +8,9 @@ interface Props {
     starCount?: number;
 }
 
-export default function Starfield(props: Props) {
-    const {
+const Starfield = memo((props: Props) => {
+    const ref = useRef(null);
+    let {
         speedFactor = 0.05,
         backgroundColor = "black",
         starColor = [255, 255, 255],
@@ -150,8 +151,11 @@ export default function Starfield(props: Props) {
         <motion.canvas
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            ref={ref}
             id="starfield"
             className="p-0 m-0 absolute inset-0 opacity-100 max-h-screen max-w-screen overflow-hidden pointer-events-none"
         />
     );
-}
+});
+
+export default Starfield;

@@ -2,24 +2,57 @@ import StarField from "./StarField";
 import Navbar from "./navigation/NavBar";
 import "./HeroSection.css";
 import { useScroll, useSpring, useTransform } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
+import RadialLightEffect from "./radial-light-effect";
 
 const HeroSection = () => {
-    const { scrollY } = useScroll();
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (event: React.MouseEvent) => {
+        const { clientX, clientY } = event;
+        setCursorPosition({ x: clientX, y: clientY });
+    };
+    const ref = useRef(null);
+    const { scrollY } = useScroll({
+        target: ref,
+        offset: ["end end", "end start"],
+    });
 
     // Parallax translation
     const translateY = useTransform(scrollY, [0, 750], [0, -1000]);
-    const opacity = useTransform(scrollY, [0, 800], [1, 0]);
+    const opacity = useTransform(scrollY, [0, 600], [1, 0]);
+    const scale = useTransform(scrollY, [0, 800], [1, 0.5]);
+    const position = useTransform(scrollY, (pos) => {
+        return pos === 1 ? "relative" : "sticky";
+    });
 
     return (
         <motion.div
-            className="h-screen sticky top-0 w-full z-10"
+            ref={ref}
+            className="h-screen sticky overflow-hidden top-0 w-full z-10"
             style={{
                 translateY: translateY,
                 opacity: opacity,
+                position,
             }}
+            onMouseMove={handleMouseMove}
         >
+            <motion.div
+                className="absolute z-50 w-[500px] h-[500px] bg-gradient-radial from-orange-500/20 via-transparent to-transparent rounded-full opacity-90 blur-3xl pointer-events-none"
+                style={{
+                    top: cursorPosition.y - 250, // Offset by half the size of the light
+                    left: cursorPosition.x - 250,
+                }}
+                animate={{
+                    top: cursorPosition.y - 250,
+                    left: cursorPosition.x - 250,
+                }}
+                transition={{
+                    type: "tween",
+                    duration: 0.1,
+                }}
+            />
             <header className="h-screen overflow-x-hidden">
                 <div className="relative">
                     <StarField />
@@ -30,7 +63,13 @@ const HeroSection = () => {
                 </div>
                 <Navbar />
 
-                <div className="flex flex-col justify-center items-center mx-2 lg:flex-row">
+                <motion.div
+                    style={{
+                        opacity: opacity,
+                        scale,
+                    }}
+                    className="flex flex-col justify-center items-center mx-2 lg:flex-row"
+                >
                     <h1 className="text-6xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-10 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10">
                         <span>Welcome to</span>
                         <br />
@@ -60,7 +99,7 @@ const HeroSection = () => {
                             className="hidden 3xl:block w-24 h-24 animate-orbit-xl rounded-full absolute left-24 top-24 z-0 cursor-pointer"
                         />
                     </div>
-                </div>
+                </motion.div>
             </header>
             <div
                 className="cursor-pointer hidden lg:block -mt-32 3xl:-mt-32"
