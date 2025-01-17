@@ -34,7 +34,11 @@ const Card = ({
                     top: ` ${35 * index}px`,
                 }}
                 className="relative w-full mx-4 md:mx-0 md:w-[1000px] h-[600px] rounded-2xl shadow-2xl"
-            ></motion.div>
+            >
+                <p className="flex justify-center items-center text-center w-full h-full text-4xl font-bold text-white shadow-2xl">
+                    Currently in construction
+                </p>
+            </motion.div>
         </div>
     );
 };
