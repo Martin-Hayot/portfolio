@@ -1,5 +1,4 @@
 import StarField from "./StarField";
-import Navbar from "./navigation/NavBar";
 import "./HeroSection.css";
 import { useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
@@ -19,7 +18,7 @@ const HeroSection = () => {
     });
 
     // Parallax translation
-    const translateY = useTransform(scrollYProgress, [0.1, 1], [0, -400]);
+    const translateY = useTransform(scrollYProgress, [0.1, 1], [0, -100]);
     const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
     const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.5]);
 
@@ -56,7 +55,6 @@ const HeroSection = () => {
                         <div className="absolute bottom-0 right-20 h-[134px] w-[134px] md:w-[300px] md:h-[300px] 3xl:w-[380px] 3xl:h-[380px] rounded-full bg-violet-500 blur-[150px] md:blur-[350px] opacity-70"></div>
                     </div>
                 </div>
-                <Navbar />
 
                 <motion.div
                     style={{

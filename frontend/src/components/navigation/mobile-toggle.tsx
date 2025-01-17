@@ -16,7 +16,7 @@ export const MobileToggle = () => {
             </SheetTrigger>
             <SheetContent
                 side="right"
-                className="p-0 flex gap-0 border-none pl-4"
+                className="fixed p-0 flex gap-0 border-none pl-4 "
             >
                 <div className="w-[72px]">
                     <NavigationSidebar setOpen={setOpen} />
