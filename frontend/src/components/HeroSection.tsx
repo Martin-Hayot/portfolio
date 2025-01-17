@@ -25,7 +25,7 @@ const HeroSection = () => {
     return (
         <motion.div
             ref={ref}
-            className="h-screen overflow-hidden top-0 w-full z-10"
+            className="h-screen w-full overflow-hidden relative"
             style={{
                 translateY: translateY,
                 opacity: opacity,
@@ -33,7 +33,7 @@ const HeroSection = () => {
             onMouseMove={handleMouseMove}
         >
             <motion.div
-                className="absolute z-50 w-[500px] h-[500px] bg-gradient-radial from-orange-500/20 via-transparent to-transparent rounded-full opacity-90 blur-3xl pointer-events-none"
+                className="absolute w-96 h-96 z-50 bg-gradient-radial from-orange-500/20 via-transparent to-transparent rounded-full opacity-90 blur-3xl pointer-events-none overflow-hidden"
                 style={{
                     top: cursorPosition.y - 250, // Offset by half the size of the light
                     left: cursorPosition.x - 250,
@@ -47,7 +47,7 @@ const HeroSection = () => {
                     duration: 0.1,
                 }}
             />
-            <header className="h-screen overflow-x-hidden">
+            <header className="h-full w-full">
                 <div className="relative">
                     <StarField />
                     <div className="absolute w-full h-screen">
@@ -63,7 +63,7 @@ const HeroSection = () => {
                     }}
                     className="flex flex-col justify-center items-center mx-2 lg:flex-row"
                 >
-                    <h1 className="text-6xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-10 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10">
+                    <h1 className="text-6xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-32 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10">
                         <span>Welcome to</span>
                         <br />
                         <span className="lg:pl-20 bg-gradient-to-br from-orange-500 from-10% to-purple-600 inline-block text-transparent bg-clip-text">
