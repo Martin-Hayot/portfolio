@@ -29,7 +29,7 @@ const NavBar: React.FC = () => {
         <motion.div
             ref={ref}
             animate={controls}
-            className={`fixed overflow-hidden top-0 w-full z-50 `}
+            className={`fixed overflow-hidden top-0 w-full z-30`}
         >
             <nav className="flex poppins-regular items-center text-xl justify-between text-white py-6 px-2 md:px-6 mx-5 md:mx-10">
                 <a
