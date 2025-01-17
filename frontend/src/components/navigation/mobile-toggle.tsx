@@ -10,9 +10,7 @@ export const MobileToggle = () => {
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger onClick={() => setOpen(!open)} asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden ">
-                    <Menu className="w-10 h-10 text-white" />
-                </Button>
+                <Menu className="text-white w-6 h-6 cursor-pointer" />
             </SheetTrigger>
             <SheetContent
                 side="right"

@@ -61,9 +61,9 @@ const HeroSection = () => {
                         opacity: opacity,
                         scale,
                     }}
-                    className="flex flex-col justify-center items-center mx-2 lg:flex-row"
+                    className="flex flex-col justify-center items-center mx-10 lg:mx-0 lg:flex-row sm:pt-16"
                 >
-                    <h1 className="text-6xl xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-32 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10">
+                    <h1 className="text-5xl poppins-medium xl:text-8xl 3xl:text-[10rem] md:text-8xl text-white text-center pt-32 lg:text-left lg:pt-40 lg:mt-20 lg:ml-20 z-10">
                         <span>Welcome to</span>
                         <br />
                         <span className="lg:pl-20 bg-gradient-to-br from-orange-500 from-10% to-purple-600 inline-block text-transparent bg-clip-text">
