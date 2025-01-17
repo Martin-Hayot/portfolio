@@ -35,12 +35,12 @@ const HeroSection = () => {
             <motion.div
                 className="absolute w-96 h-96 z-50 bg-gradient-radial from-orange-500/20 via-transparent to-transparent rounded-full opacity-90 blur-3xl pointer-events-none overflow-hidden"
                 style={{
-                    top: cursorPosition.y - 250, // Offset by half the size of the light
-                    left: cursorPosition.x - 250,
+                    top: cursorPosition.y - 192, // Offset by half the size of the light
+                    left: cursorPosition.x - 192,
                 }}
                 animate={{
-                    top: cursorPosition.y - 250,
-                    left: cursorPosition.x - 250,
+                    top: cursorPosition.y - 192,
+                    left: cursorPosition.x - 192,
                 }}
                 transition={{
                     type: "tween",
