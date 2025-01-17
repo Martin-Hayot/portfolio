@@ -10,7 +10,7 @@ const NavBar: React.FC = () => {
 
     useEffect(() => {
         const unsubscribe = scrollY.on("change", (value) => {
-            if (value > 500) {
+            if (value > 250) {
                 controls.start({
                     backdropFilter: `blur(${blur.get()}px)`,
                     backgroundColor: "rgba(0,0,0,0.4)",
