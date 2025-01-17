@@ -34,7 +34,11 @@ if (logoSrc == "blog") {
                 icon ? (
                     <BookOpenText className="w-10 h-10" />
                 ) : (
-                    <img class="w-10 h-10" src={logoSrc} alt={logoAlt} />
+                    <img
+                        class="min-w-10 min-h-10 w-10 h-10"
+                        src={logoSrc}
+                        alt={logoAlt}
+                    />
                 )
             }
         </div>

@@ -13,7 +13,7 @@ const NavBar: React.FC = () => {
             if (value > 250) {
                 controls.start({
                     backdropFilter: `blur(${blur.get()}px)`,
-                    backgroundColor: "rgba(0,0,0,0.4)",
+                    backgroundColor: "rgba(0,0,0,0.3)",
                 });
             } else {
                 controls.start({
