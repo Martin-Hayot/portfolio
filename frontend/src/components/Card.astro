@@ -1,28 +1,52 @@
 ---
+import { BookOpenText } from "lucide-react";
+
 interface Props {
     title: string;
     body: string;
     href: string;
     target?: string;
+    logoSrc?: string;
+    logoAlt?: string;
 }
 
-const { href, title, body } = Astro.props;
-let { target } = Astro.props;
+const { href, title, body, logoAlt } = Astro.props;
+let { target, logoSrc } = Astro.props;
+let icon;
 
 if (!target) {
     target = "_self";
 }
+
+if (!logoSrc) {
+    logoSrc = "/rocket.svg";
+}
+
+if (logoSrc == "blog") {
+    icon = BookOpenText;
+}
 ---
 
 <li class="link-card">
-    <a href={href} target={target}>
-        <h2>
-            {title}
-            <span>&rarr;</span>
-        </h2>
-        <p>
-            {body}
-        </p>
+    <a href={href} target={target} class="flex flex-row items-center gap-x-6">
+        <div>
+            {
+                icon ? (
+                    <BookOpenText className="w-10 h-10" />
+                ) : (
+                    <img class="w-10 h-10" src={logoSrc} alt={logoAlt} />
+                )
+            }
+        </div>
+        <div>
+            <h2>
+                {title}
+                <span>&rarr;</span>
+            </h2>
+            <p>
+                {body}
+            </p>
+        </div>
     </a>
 </li>
 <style>

@@ -4,7 +4,6 @@ import "./HeroSection.css";
 import { useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import RadialLightEffect from "./radial-light-effect";
 
 const HeroSection = () => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -14,27 +13,23 @@ const HeroSection = () => {
         setCursorPosition({ x: clientX, y: clientY });
     };
     const ref = useRef(null);
-    const { scrollY } = useScroll({
+    const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["end end", "end start"],
     });
 
     // Parallax translation
-    const translateY = useTransform(scrollY, [0, 750], [0, -1000]);
-    const opacity = useTransform(scrollY, [0, 600], [1, 0]);
-    const scale = useTransform(scrollY, [0, 800], [1, 0.5]);
-    const position = useTransform(scrollY, (pos) => {
-        return pos === 1 ? "relative" : "sticky";
-    });
+    const translateY = useTransform(scrollYProgress, [0.1, 1], [0, -400]);
+    const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+    const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.5]);
 
     return (
         <motion.div
             ref={ref}
-            className="h-screen sticky overflow-hidden top-0 w-full z-10"
+            className="h-screen overflow-hidden top-0 w-full z-10"
             style={{
                 translateY: translateY,
                 opacity: opacity,
-                position,
             }}
             onMouseMove={handleMouseMove}
         >
