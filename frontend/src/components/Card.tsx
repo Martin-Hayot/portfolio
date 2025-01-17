@@ -31,7 +31,7 @@ const Card = ({
                 style={{
                     scale,
                     backgroundColor: color,
-                    top: `calc(-10% + ${30 * index}px)`,
+                    top: ` ${35 * index}px`,
                 }}
                 className="relative w-full mx-4 md:mx-0 md:w-[1000px] h-[600px] rounded-2xl shadow-2xl"
             ></motion.div>
