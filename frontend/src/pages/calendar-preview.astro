@@ -1,14 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import NavBar from "../components/navigation/NavBar.tsx";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Calendar from "../components/Calendar.vue";
-import Footer from "../components/Footer.astro";
 ---
 
-<Layout title="Calendar preview">
-    <NavBar />
+<BaseLayout title="Calendar preview">
     <main class="h-screen mt-20">
         <Calendar client:load />
     </main>
-    <Footer />
-</Layout>
+</BaseLayout>
