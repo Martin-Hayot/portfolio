@@ -1,33 +1,13 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import Card from "@/components/Card.astro";
-import Footer from "@/components/Footer.astro";
 import "@/styles/globals.css";
-import { BookOpenText } from "lucide-react";
 import Projects from "@/components/Projects";
-import NavBar from "@/components/navigation/NavBar";
+import HomeLayout from "@/layouts/HomeLayout.astro";
 ---
 
-<script src="https://unpkg.com/lenis@1.1.19/dist/lenis.min.js">
-    // Initialize Lenis
-    const lenis = new Lenis();
-
-    // Use requestAnimationFrame to continuously update the scroll
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-</script>
-<link rel="stylesheet" href="https://unpkg.com/lenis@1.1.19/dist/lenis.css" />
-<style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-</style>
-<Layout title={"Martin'space"}>
-    <NavBar client:load />
+<HomeLayout title={"Martin'space"}>
     <HeroSection client:load />
 
     <div class="lg:pt-20" id="about">
@@ -78,7 +58,7 @@ import NavBar from "@/components/navigation/NavBar";
                 alt="astro talking"
                 decoding="async"
                 loading="lazy"
-                class="h-72 w-66 xl:h-96 xl:w-84"
+                class="h-72 w-66 md:mt-6 lg:mt-0 xl:h-96 xl:w-84"
                 style="clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);"
             />
         </div>
@@ -136,9 +116,7 @@ import NavBar from "@/components/navigation/NavBar";
             >Download <span class="font-bold">CV</span></a
         >
     </div>
-
-    <Footer />
-</Layout>
+</HomeLayout>
 
 <style>
     @keyframes orbit-sm {

@@ -1,9 +1,6 @@
 import { Heart, Shield } from "lucide-react";
 
 const NavigationSidebar = ({ setOpen }: { setOpen: Function }) => {
-    const closeSidebar = () => {
-        setOpen(false);
-    };
     return (
         <div className="ml-6 mt-6">
             <nav className="flex flex-col text-4xl mt-12 gap-y-5 text-nowrap">

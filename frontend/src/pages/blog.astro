@@ -1,5 +1,51 @@
 ---
-import InConstruction from "../layouts/InConstruction.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const allPosts = Object.values(
+    import.meta.glob("./posts/*.md", { eager: true })
+);
+const pageTitle = "My Blog";
 ---
 
-<InConstruction />
+<BaseLayout title={pageTitle}>
+    <main class="w-[60%] mx-auto mt-32 min-h-screen text-white">
+        <h1 class="py-6">My Blog</h1>
+        <p class="py-6 w-[60%]">
+            Welcome to my blog! Here, I share my journey as a developer, my
+            discoveries and lessons learned along the way. Follow along as I
+            explore the world of development.
+        </p>
+        <h2 class="text-2xl font-semibold mb-6">Recent Posts</h2>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                allPosts.map((post: any) => (
+                    <li class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors">
+                        <a class="block" href={post.url}>
+                            <div class="flex flex-col gap-1">
+                                <h3 class="text-xl font-medium mb-2">
+                                    {post.frontmatter.title}
+                                </h3>
+                                <p class="text-gray-300">
+                                    {post.frontmatter.description}
+                                </p>
+                                <p class="text-gray-300 text-end">
+                                    {post.frontmatter.pubDate
+                                        .toString()
+                                        .slice(0, 10)}
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+        <div class="flex justify-center pt-32">
+            <a
+                href="/tags"
+                class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors"
+            >
+                View All Tags
+            </a>
+        </div>
+    </main>
+</BaseLayout>

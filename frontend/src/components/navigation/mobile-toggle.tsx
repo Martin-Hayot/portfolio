@@ -1,7 +1,11 @@
 import { Menu } from "lucide-react";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+import {
+    Sheet,
+    SheetContent,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
 import NavigationSidebar from "@/components/navigation/navigation-sidebar";
 import { useState } from "react";
 
@@ -16,6 +20,9 @@ export const MobileToggle = () => {
                 side="right"
                 className="fixed p-0 flex gap-0 border-none pl-4 "
             >
+                <SheetTitle className="text-white text-2xl font-bold hidden">
+                    Menu
+                </SheetTitle>
                 <div className="w-[72px]">
                     <NavigationSidebar setOpen={setOpen} />
                 </div>
