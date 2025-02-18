@@ -58,12 +58,17 @@ export const projects: ProjectsProps[] = [
                 icon: "/shadcnui.png",
                 href: "https://ui.shadcn.com",
             },
+            {
+                name: "Go",
+                icon: "/go.svg",
+                href: "https://golang.org",
+            },
         ],
     },
     {
         href: "https://github.com/Martin-Hayot/Projet-Dev-3",
-        title: "Electric city",
-        body: "Revamping Electric City's website for better visibility and client interaction. ",
+        title: "Mix and Mastering",
+        body: "Making a website for a music studio who provides mixing and mastering services.",
         description:
             "Adding client and admin interfaces for streamlined orders, appointments, and account management. Unique feature: direct online interaction, setting it apart from competitors. Email notifications for order updates.",
         projectImg: "/electric-city-homepage.png",

@@ -25,7 +25,7 @@ import Footer from "@/components/Footer.astro";
         class="bg-neutral-950 text-sm text-neutral-400 overflow-x-hidden"
     >
         <Loader client:load />
-        <NavBar client:load />
+        <NavBar transition:name="nav" client:only="react" />
         <slot />
         <Footer />
 

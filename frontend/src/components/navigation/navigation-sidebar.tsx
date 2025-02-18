@@ -15,10 +15,10 @@ const NavigationSidebar = ({ setOpen }: { setOpen: Function }) => {
                     </li>
                     <li>
                         <a
-                            href="/projects"
+                            href="/blog"
                             className="text-primary hover:text-accent transition-all duration-100 ease-out"
                         >
-                            Projects
+                            Blog
                         </a>
                     </li>
                     <li>

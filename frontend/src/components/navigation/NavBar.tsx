@@ -6,6 +6,7 @@ const NavBar: React.FC = () => {
     const ref = useRef(null);
     const controls = useAnimation();
     const { scrollY } = useScroll();
+    const [pageName, setPageName] = useState(document.URL.split("/").pop());
     const blur = useTransform(scrollY, [0, 500], [0, 20]);
 
     useEffect(() => {
@@ -39,9 +40,40 @@ const NavBar: React.FC = () => {
                     Martin Hayot
                 </a>
                 <div className="hidden lg:flex space-x-10 lg:space-x-12 xl:space-x-16">
-                    <a href="/projects">Projects</a>
-                    <a href="/blog">Blog</a>
-                    <a href="/contact">Contact me</a>
+                    <motion.a
+                        style={{
+                            color:
+                                pageName === ""
+                                    ? "white"
+                                    : "rgba(255,255,255,0.6)",
+                        }}
+                        href="/"
+                    >
+                        Home
+                    </motion.a>
+
+                    <motion.a
+                        style={{
+                            color:
+                                pageName === "blog"
+                                    ? "white"
+                                    : "rgba(255,255,255,0.6)",
+                        }}
+                        href="/blog"
+                    >
+                        Blog
+                    </motion.a>
+                    <motion.a
+                        style={{
+                            color:
+                                pageName === "contact"
+                                    ? "white"
+                                    : "rgba(255,255,255,0.6)",
+                        }}
+                        href="/contact"
+                    >
+                        Contact me
+                    </motion.a>
                 </div>
                 <div className="lg:hidden z-20">
                     <MobileToggle />
