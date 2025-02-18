@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/BlogLayout.astro
 title: "My First Blog Post"
 pubDate: 2022-07-01
 description: "This is the first post of my new Astro blog."
@@ -11,10 +10,6 @@ tags: ["astro", "blogging", "learning in public"]
 ---
 
 ## Table of Contents
-
-- [Table of Contents](#table-of-contents)
-- [What I've accomplished](#what-ive-accomplished)
-- [What's next](#whats-next)
 
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
 

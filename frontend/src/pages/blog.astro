@@ -1,51 +1,92 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import BlogList from "@/components/blog/BlogList";
+import SearchInput from "@/components/SearchInput";
 
-const allPosts = Object.values(
-    import.meta.glob("./posts/*.md", { eager: true })
-);
+// Get all blog posts and sort them by date (newest first)
+const allPosts = await getCollection("blog");
+const sortedPosts = allPosts.sort((a, b) => {
+    return (
+        new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+    );
+});
+
+// Pagination settings
+const postsPerPage = 9;
+const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
+const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+
+// Get posts for current page
+const startIndex = (currentPage - 1) * postsPerPage;
+const endIndex = startIndex + postsPerPage;
+const currentPosts = sortedPosts.slice(startIndex, endIndex);
+
 const pageTitle = "My Blog";
 ---
 
 <BaseLayout title={pageTitle}>
-    <main class="w-[60%] mx-auto mt-32 min-h-screen text-white">
-        <h1 class="py-6">My Blog</h1>
-        <p class="py-6 w-[60%]">
+    <main class="md:w-[60%] mx-auto mt-32 min-h-screen text-white">
+        <h1 class="py-6 text-4xl font-bold">My Blog</h1>
+        <p class="pb-6 md:w-[70%] text-lg">
             Welcome to my blog! Here, I share my journey as a developer, my
             discoveries and lessons learned along the way. Follow along as I
             explore the world of development.
         </p>
-        <h2 class="text-2xl font-semibold mb-6">Recent Posts</h2>
-        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {
-                allPosts.map((post: any) => (
-                    <li class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors">
-                        <a class="block" href={post.url}>
-                            <div class="flex flex-col gap-1">
-                                <h3 class="text-xl font-medium mb-2">
-                                    {post.frontmatter.title}
-                                </h3>
-                                <p class="text-gray-300">
-                                    {post.frontmatter.description}
-                                </p>
-                                <p class="text-gray-300 text-end">
-                                    {post.frontmatter.pubDate
-                                        .toString()
-                                        .slice(0, 10)}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                ))
-            }
-        </ul>
-        <div class="flex justify-center pt-32">
+        <div class="relative mb-5 flex flex-col md:flex-row gap-5">
+            <SearchInput client:load />
             <a
                 href="/tags"
                 class="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors"
             >
                 View All Tags
             </a>
+        </div>
+        <h2 class="text-2xl font-semibold mb-6">Recent Posts</h2>
+        <BlogList posts={sortedPosts} client:only="react" />
+
+        <!-- Pagination -->
+        <div class="flex justify-center gap-4 mt-10 py-8">
+            {
+                currentPage > 1 && (
+                    <a
+                        href={`/blog?page=${currentPage - 1}`}
+                        class="bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                    >
+                        Previous
+                    </a>
+                )
+            }
+
+            <div class="flex gap-2">
+                {
+                    Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                        (pageNum) => (
+                            <a
+                                href={`/blog?page=${pageNum}`}
+                                class={`px-4 py-2 rounded-lg transition-colors ${
+                                    currentPage === pageNum
+                                        ? "bg-gray-600"
+                                        : "bg-gray-800 hover:bg-gray-700"
+                                }`}
+                            >
+                                {pageNum}
+                            </a>
+                        )
+                    )
+                }
+            </div>
+
+            {
+                currentPage < totalPages && (
+                    <a
+                        href={`/blog?page=${currentPage + 1}`}
+                        class="bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                    >
+                        Next
+                    </a>
+                )
+            }
         </div>
     </main>
 </BaseLayout>

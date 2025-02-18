@@ -5,25 +5,28 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-    <main class="w-[90%] mx-auto mt-32 min-h-screen text-white">
-        <h1>{frontmatter.title}</h1>
-        <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
-        <p><em>{frontmatter.description}</em></p>
-        <p>Written by: {frontmatter.author}</p>
-        <img
-            src={frontmatter.image.url}
-            width="300"
-            alt={frontmatter.image.alt}
-        />
-        <ul class="flex gap-2 py-6">
-            {
-                frontmatter.tags.map((tag: string) => (
-                    <a class="bg-gray-800 p-2 rounded-md" href={`/tags/${tag}`}>
-                        {tag}
-                    </a>
-                ))
-            }
-        </ul>
-        <slot />
-    </main>
+  <main class="max-w-2xl mx-auto mt-32 min-h-screen text-white">
+    <div class="flex flex-col gap-y-2 pb-5 px-4">
+      <h1 class="text-5xl font-bold py-6">{frontmatter.title}</h1>
+      <p class="text-xl">{frontmatter.pubDate.toLocaleDateString()}</p>
+      <p class="text-lg"><em>{frontmatter.description}</em></p>
+      <p class="text-md">Written by: {frontmatter.author}</p>
+    </div>
+    <img
+      class="w-full"
+      src={frontmatter.image.url}
+      width="300"
+      alt={frontmatter.image.alt}
+    />
+    <ul class="flex gap-2 py-6 px-4">
+      {
+        frontmatter.tags.map((tag: string) => (
+          <a class="bg-gray-800 p-2 rounded-md" href={`/tags/${tag}`}>
+            {tag}
+          </a>
+        ))
+      }
+    </ul>
+    <slot />
+  </main>
 </BaseLayout>
