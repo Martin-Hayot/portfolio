@@ -22,7 +22,7 @@ const AboutSection = () => {
             className="w-full flex flex-col justify-center items-center z-10"
         >
             <div
-                className="mx-auto bg-neutral-900 bg-opacity-80 w-[80%] rounded-3xl shadow-1xl overflow-hidden"
+                className="mx-auto bg-neutral-900 bg-opacity-80 w-[80%] rounded-xl shadow-1xl overflow-hidden"
                 id="about-me"
             >
                 <div className="flex flex-col xl:flex-row h-full">
