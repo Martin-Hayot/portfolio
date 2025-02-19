@@ -36,7 +36,7 @@ const AboutSection = () => {
                             complex challenges, learning new technologies, and
                             continuously improving my skills.
                         </p>
-                        <p className="text-xl 3xl:text-2xl pt-6">
+                        {/* <p className="text-xl 3xl:text-2xl pt-6">
                             I recently completed my{" "}
                             <b>
                                 Bachelor’s degree in Computer Science (IT
@@ -61,7 +61,7 @@ const AboutSection = () => {
                                 <li>Networking & cybersecurity</li>
                                 <li>Electronics & project management</li>
                             </ul>
-                        </div>
+                        </div> */}
                         <p className="text-xl 3xl:text-2xl pt-8">
                             I'm also a <b>self-taught developer</b>, always
                             looking for new challenges and opportunities to
