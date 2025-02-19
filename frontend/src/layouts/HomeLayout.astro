@@ -24,6 +24,9 @@ import Footer from "@/components/Footer.astro";
         transition:animate="none"
         class="bg-neutral-950 text-sm text-neutral-400 overflow-x-hidden"
     >
+        <script>
+            import "/src/scripts/lenis.ts";
+        </script>
         <Loader client:load />
         <NavBar transition:name="nav" client:only="react" />
         <slot />
