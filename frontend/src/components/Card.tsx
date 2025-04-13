@@ -34,7 +34,7 @@ const Card = ({
                 style={{ scale, top: `${35 * index}px` }}
                 animate={{ rotateX: isOpen ? -180 : 0 }}
                 transition={{ duration: 0.6 }}
-                className="relative w-full mx-4 md:mx-0 md:w-[1000px] h-[600px] rounded-2xl overflow-hidden bg-neutral-800"
+                className="relative w-full mx-4 md:mx-0 md:w-[1000px] h-[600px] xl:h-[720px] xl:w-[1280px]  rounded-2xl overflow-hidden bg-neutral-800"
             >
                 {/* Front Side */}
                 <motion.div
@@ -100,17 +100,28 @@ const Card = ({
                             </a>
                         ))}
                     </div>
-                    <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-400 underline"
-                    >
-                        Git Repository
-                    </a>
+                    <div className="mt-4 flex flex-col gap-3 md:flex-row">
+                        <a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-400 underline"
+                        >
+                            Git Repository
+                        </a>
+                        <a
+                            href={linkToPreview}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-400 underline"
+                        >
+                            {linkMessage}
+                        </a>
+                    </div>
+
                     <button
                         onClick={() => setIsOpen(false)}
-                        className="mt-4 px-5 py-2 border-2 border-white rounded-lg hover:bg-white hover:text-neutral-900 transition-all duration-150"
+                        className="mt-8 px-5 py-2 border-2 border-white rounded-lg hover:bg-white hover:text-neutral-900 transition-all duration-150"
                     >
                         Back
                     </button>

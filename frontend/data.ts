@@ -21,10 +21,10 @@ export const projects: ProjectsProps[] = [
         title: "VaLe Garage",
         body: "A B2C and B2B auction and appointment taking platform for cars.",
         description:
-            "A full-stack web application that allows users to buy and sell cars through auctions. It also allows users to book appointments to buy or test the vehicules.",
-        href: "https://gitlab.com/Martin-Hayot/vale-garage",
+            "A full-stack web application that allows users to buy cars through auctions. It also allows users to book appointments to buy or test the vehicules.",
+        href: "https://github.com/Martin-Hayot/vale-garage",
         projectImg: "/vale-garage-homepage.png",
-        linkToPreview: "https://vale-garage.com",
+        linkToPreview: "https://vale-garage-martinhayots-projects.vercel.app/",
         linkMessage: "Check out the live site",
         color: "#575A5E",
         techStack: [
