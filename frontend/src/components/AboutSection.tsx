@@ -1,104 +1,137 @@
-import {
-    motion,
-    MotionValue,
-    scroll,
-    useScroll,
-    useTransform,
-} from "motion/react";
-import { useEffect, useRef } from "react";
+const skills = [
+    {
+        name: "Go",
+    },
+    {
+        name: "JavaScript",
+    },
+    {
+        name: "TypeScript",
+    },
+    {
+        name: "RESTful APIs",
+    },
+    {
+        name: "Python",
+    },
+    {
+        name: "React",
+    },
+    {
+        name: "Node.js",
+    },
+    {
+        name: "Next.js",
+    },
 
-function useParallax(value: MotionValue<number>, distance: number) {
-    return useTransform(value, [0, 1], [-distance, distance]);
-}
+    {
+        name: "Tailwind CSS",
+    },
+    {
+        name: "SQL",
+    },
+    {
+        name: "PostgreSQL",
+    },
+
+    {
+        name: "Docker",
+    },
+
+    {
+        name: "AWS",
+    },
+    {
+        name: "HTML & CSS",
+    },
+];
+
+const interests = [
+    {
+        name: "Open Source",
+    },
+    {
+        name: "New Technologies",
+    },
+    {
+        name: "Web Development",
+    },
+    {
+        name: "Game Development",
+    },
+    {
+        name: "DevOps",
+    },
+    {
+        name: "Piano",
+    },
+    {
+        name: "Hiking",
+    },
+];
 
 const AboutSection = () => {
     return (
-        <motion.div
-            initial={{ scale: 0.95 }}
-            whileInView={{
-                scale: 1,
-                transition: { duration: 0.5 },
-            }}
-            className="w-full flex flex-col justify-center items-center z-10"
-        >
-            <div
-                className="mx-auto bg-neutral-900 bg-opacity-80 w-[80%] rounded-xl shadow-1xl overflow-hidden"
-                id="about-me"
-            >
-                <div className="flex flex-col xl:flex-row h-full">
-                    <div className="p-8 md:pr-20 pb-16">
-                        <h2 className="text-4xl 3xl:text-5xl text-white text-left">
-                            About me
-                        </h2>
-                        <p className="text-xl 3xl:text-2xl pt-8">
-                            Hey there! I'm Martin, a tech enthusiast who thrives
-                            on solving problems through code. I love diving into
-                            complex challenges, learning new technologies, and
-                            continuously improving my skills.
-                        </p>
-                        {/* <p className="text-xl 3xl:text-2xl pt-6">
-                            I recently completed my{" "}
-                            <b>
-                                Bachelor’s degree in Computer Science (IT
-                                specialization)
-                            </b>{" "}
-                            at{" "}
-                            <a
-                                href="https://ephec.be"
-                                target="_blank"
-                                className="text-violet-600"
-                            >
-                                EPHEC
-                            </a>
-                            , where I developed strong skills in:
-                        </p>
-                        <div className="text-xl 3xl:text-2xl pt-8">
-                            <ul className="list-disc list-inside">
-                                <li>Fullstack web development</li>
-                                <li>Low-level programming</li>
-
-                                <li>Database management</li>
-                                <li>Networking & cybersecurity</li>
-                                <li>Electronics & project management</li>
-                            </ul>
-                        </div> */}
-                        <p className="text-xl 3xl:text-2xl pt-8">
-                            I'm also a <b>self-taught developer</b>, always
-                            looking for new challenges and opportunities to
-                            expand my knowledge.
-                        </p>
-                        <div className="text-xl 3xl:text-2xl pt-8">
-                            💡 What I love working on:
-                            <ul className="list-disc list-inside">
-                                <li>APIs & backend development</li>
-
-                                <li>
-                                    Building scalable & efficient applications
-                                </li>
-                                <li>Experimenting with new technologies</li>
-                            </ul>
-                            <br />
-                            Recently, I've been working a lot with{" "}
-                            <a
-                                href="https://go.dev"
-                                target="_blank"
-                                className="text-violet-600"
-                            >
-                                Go
-                            </a>
-                            , and I’m focused on building my expertise to create
-                            high-performance backend systems.
-                        </div>
-                    </div>
-                    <div className="bg-white flex justify-center items-center">
-                        <img
-                            src="/astro_on_computer.jpg"
-                            className="md:w-[40em] rounded-3xl"
-                        />
-                    </div>
-                </div>
+        <div className="mx-auto w-[80%] lg:max-w-7xl">
+            <h2 className="text-4xl pb-8 text-white">About Me</h2>
+            <div className="flex items-center md:items-start gap-10 md:flex-row flex-col justify-between">
+                <p className="text-white text-lg font-normal leading-normal pb-3 pt-1 max-w-4xl">
+                    Hi, I'm Martin — a passionate developer who loves turning
+                    complex problems into clean, efficient code. I'm a
+                    bachelor's degree graduate from EPHEC, but I'm also a
+                    self-taught tech enthusiast with a strong focus on backend
+                    development, always eager to explore new technologies and
+                    improve my craft.
+                    <br /> <br />
+                    💡 What drives me:{" "}
+                    <ul className="list-disc pl-10">
+                        <li>Designing and building scalable APIs</li>
+                        <li>
+                            Solving real-world problems through thoughtful
+                            engineering
+                        </li>
+                        <li>
+                            Continuously learning and pushing the boundaries of
+                            what I can achieve
+                        </li>
+                    </ul>
+                    <br />
+                    Lately, I've been diving deep into Go, sharpening my skills
+                    to build high-performance, reliable backend services.
+                </p>
+                <img
+                    src="/astro_on_computer.jpg"
+                    alt=""
+                    className="w-72 h-72 rounded-lg"
+                />
             </div>
-        </motion.div>
+            <div className="mt-10">
+                <h3 className="text-2xl pb-5 text-white">Skills</h3>
+                <ul className="list-none flex gap-3 max-w-4xl flex-row flex-wrap text-white">
+                    {skills.map((skill) => (
+                        <li
+                            key={skill.name}
+                            className="flex bg-[#3f2348] px-4 py-1 rounded-md items-center gap-2"
+                        >
+                            <span>{skill.name}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="mt-10">
+                <h3 className="text-2xl pb-5 text-white">Interests</h3>
+                <ul className="list-none flex gap-3 max-w-4xl flex-row flex-wrap text-white">
+                    {interests.map((interest) => (
+                        <li
+                            key={interest.name}
+                            className="flex bg-[#3f2348] px-4 py-1 rounded-md items-center gap-2"
+                        >
+                            <span>{interest.name}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
     );
 };
 
