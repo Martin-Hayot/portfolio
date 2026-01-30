@@ -57,7 +57,7 @@ const NavBar: React.FC = () => {
           href="/"
           className="z-30 text-2xl md:text-3xl ease-out transition-all duration-300"
         >
-          Martin Hayot
+          <img src="/astro_earth.png" alt="Logo" className="w-20 h-20" />
         </a>
         <div className="hidden lg:flex space-x-10 lg:space-x-12 xl:space-x-16">
           <motion.a

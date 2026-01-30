@@ -1,196 +1,168 @@
 ---
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import Card from "@/components/Card.astro";
+import LinkGrid from "@/components/LinkGrid";
 import "@/styles/globals.css";
 import Projects from "@/components/Projects";
 import HomeLayout from "@/layouts/HomeLayout.astro";
 ---
 
 <HomeLayout title={"Martin'space"}>
-  <HeroSection client:load />
+    <HeroSection client:load />
 
-  <div class="pt-20" id="about">
-    <AboutSection client:load />
-  </div>
-  <section class="w-[80%] lg:max-w-7xl mx-auto mt-40 mb-60" id="Cards">
-    <ul role="list" class="grid grid-cols-1 md:grid-cols-2 gap-8 p-0">
-      <Card
-        href="/#projects"
-        title="My Projects "
-        body="Learn more about my projects and see them in action."
-      />
-      <Card
-        href="https://github.com/Martin-Hayot"
-        title="My Github profile "
-        body="Check out my Github profile and see what I'm working on."
-        target="_blank"
-        logoSrc="/icons8-github.svg"
-        logoAlt="Github logo"
-      />
-      <Card
-        href="/blog"
-        title="My blog "
-        body="Explore a galaxy of blog posts on web development, APIs, and more."
-        logoAlt="Book icon"
-        logoSrc="blog"
-      />
-      <Card
-        href="https://www.linkedin.com/in/martin-hayot-21988723b/"
-        title="LinkedIn"
-        body="Learn more about me and my journey as a developer."
-        target="_blank"
-        logoSrc="/icons8-linkedin.svg"
-        logoAlt="LinkedIn logo"
-      />
-    </ul>
-  </section>
-
-  <Projects client:load />
-  <section
-    class="w-[90%] mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center lg:-mt-10 mb-40"
-  >
-    <div>
-      <div class="text-5xl font-bold text-gray-200 mt-16 md:mt-0"></div>
-
-      <img
-        src="/astro_talking2.jpg"
-        alt="astro talking"
-        decoding="async"
-        loading="lazy"
-        class="h-72 w-66 md:mt-6 lg:mt-0 xl:h-96 xl:w-84"
-        style="clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);"
-      />
+    <div class="pt-20" id="about">
+        <AboutSection client:load />
     </div>
-    <div class="">
-      <div
-        class="w-full max-w-lg xl:max-w-2xl mt-20 lg:-mt-20 bg-neutral-900 rounded-lg shadow-md p-6"
-      >
-        <h2 class="text-2xl font-bold text-gray-200 mb-4">Contact Me</h2>
 
-        <form
-          method="POST"
-          action="https://formsubmit.co/mart.hyt2002@gmail.com"
-          class="flex flex-wrap"
-        >
-          <input
-            name="name"
-            type="text"
-            class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:mr-[2%]"
-            placeholder="Full Name"
-          />
-          <input
-            type="hidden"
-            name="_next"
-            value="https://martinhayot.com/thanks"
-          />
-          <input
-            name="email"
-            type="email"
-            class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:ml-[2%]"
-            placeholder="Email"
-          />
-          <textarea
-            name="message"
-            class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 md:mb-auto w-full md:w-full md:h-auto md:min-h-[100px] md:max-h-[100px] md:flex-grow md:flex-shrink md:flex-auto focus:bg-neutral-600 md:focus:outline-none focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-fastest"
-            placeholder="Message"></textarea>
+    <LinkGrid client:load />
 
-          <button
-            type="submit"
-            class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <div class="w-full flex justify-center">
-    <a
-      download
-      href="HAYOT_Martin_CV.pdf"
-      class="bg-white mb-16 py-4 px-8 rounded-full shadow-lg text-lg font-bold text-neutral-900 hover:bg-violet-950 hover:text-white transition duration-300 ease-in-out"
-      >Download <span class="font-bold">CV</span></a
+    <Projects client:load />
+    <section
+        class="w-[90%] mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center lg:-mt-10 mb-40"
     >
-  </div>
+        <div>
+            <div class="text-5xl font-bold text-gray-200 mt-16 md:mt-0"></div>
+
+            <img
+                src="/astro_talking2.jpg"
+                alt="astro talking"
+                decoding="async"
+                loading="lazy"
+                class="h-72 w-66 md:mt-6 lg:mt-0 xl:h-96 xl:w-84"
+                style="clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);"
+            />
+        </div>
+        <div class="">
+            <div
+                class="w-full max-w-lg xl:max-w-2xl mt-20 lg:-mt-20 bg-neutral-900 rounded-lg shadow-md p-6"
+            >
+                <h2 class="text-2xl font-bold text-gray-200 mb-4">
+                    Contact Me
+                </h2>
+
+                <form
+                    method="POST"
+                    action="https://formsubmit.co/mart.hyt2002@gmail.com"
+                    class="flex flex-wrap"
+                >
+                    <input
+                        name="name"
+                        type="text"
+                        class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:mr-[2%]"
+                        placeholder="Full Name"
+                    />
+                    <input
+                        type="hidden"
+                        name="_next"
+                        value="https://martinhayot.com/thanks"
+                    />
+                    <input
+                        name="email"
+                        type="email"
+                        class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150 w-full md:w-[48%] md:ml-[2%]"
+                        placeholder="Email"
+                    />
+                    <textarea
+                        name="message"
+                        class="bg-neutral-700 text-gray-200 border-0 rounded-md p-2 md:mb-auto w-full md:w-full md:h-auto md:min-h-[100px] md:max-h-[100px] md:flex-grow md:flex-shrink md:flex-auto focus:bg-neutral-600 md:focus:outline-none focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-fastest"
+                        placeholder="Message"></textarea>
+
+                    <button
+                        type="submit"
+                        class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
+                    >
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="w-full flex justify-center">
+        <a
+            download
+            href="HAYOT_Martin_CV.pdf"
+            class="bg-white mb-16 py-4 px-8 rounded-full shadow-lg text-lg font-bold text-neutral-900 hover:bg-violet-950 hover:text-white transition duration-300 ease-in-out"
+            >Download <span class="font-bold">CV</span></a
+        >
+    </div>
 </HomeLayout>
 
 <style>
-  @keyframes orbit-sm {
-    from {
-      transform: rotate(0deg) translateX(10em) rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg) translateX(10em) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit-md {
-    from {
-      transform: rotate(0deg) translateX(12em) rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg) translateX(12em) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit-lg {
-    from {
-      transform: rotate(0deg) translateX(15em) rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg) translateX(15em) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit-xl {
-    from {
-      transform: rotate(0deg) translateX(20em) rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg) translateX(20em) rotate(-360deg);
-    }
-  }
-
-  .animate-orbit-sm {
-    animation: orbit-sm 30s linear infinite;
-  }
-
-  .animate-orbit-md {
-    animation: orbit-md 30s linear infinite;
-  }
-
-  .animate-orbit-lg {
-    animation: orbit-lg 30s linear infinite;
-  }
-
-  .animate-orbit-xl {
-    animation: orbit-xl 30s linear infinite;
-  }
-
-  .animate-orbit:hover,
-  .animate-orbit-sm:hover,
-  .animate-orbit-md:hover,
-  .animate-orbit-lg:hover,
-  .animate-orbit-xl:hover {
-    animation-play-state: paused;
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    padding: 0;
-  }
-
-  @keyframes push_401 {
-    0%,
-    50% {
-      transform: translate(-50%, 0%) scale(1);
+    @keyframes orbit-sm {
+        from {
+            transform: rotate(0deg) translateX(10em) rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg) translateX(10em) rotate(-360deg);
+        }
     }
 
-    100% {
-      transform: translate(-50%, -100%) scale(0.1);
+    @keyframes orbit-md {
+        from {
+            transform: rotate(0deg) translateX(12em) rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg) translateX(12em) rotate(-360deg);
+        }
     }
-  }
+
+    @keyframes orbit-lg {
+        from {
+            transform: rotate(0deg) translateX(15em) rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg) translateX(15em) rotate(-360deg);
+        }
+    }
+
+    @keyframes orbit-xl {
+        from {
+            transform: rotate(0deg) translateX(20em) rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg) translateX(20em) rotate(-360deg);
+        }
+    }
+
+    .animate-orbit-sm {
+        animation: orbit-sm 30s linear infinite;
+    }
+
+    .animate-orbit-md {
+        animation: orbit-md 30s linear infinite;
+    }
+
+    .animate-orbit-lg {
+        animation: orbit-lg 30s linear infinite;
+    }
+
+    .animate-orbit-xl {
+        animation: orbit-xl 30s linear infinite;
+    }
+
+    .animate-orbit:hover,
+    .animate-orbit-sm:hover,
+    .animate-orbit-md:hover,
+    .animate-orbit-lg:hover,
+    .animate-orbit-xl:hover {
+        animation-play-state: paused;
+    }
+    .link-card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 0;
+    }
+
+    @keyframes push_401 {
+        0%,
+        50% {
+            transform: translate(-50%, 0%) scale(1);
+        }
+
+        100% {
+            transform: translate(-50%, -100%) scale(0.1);
+        }
+    }
 </style>

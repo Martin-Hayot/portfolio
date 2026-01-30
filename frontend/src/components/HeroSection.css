@@ -1,84 +1,35 @@
 .loader {
-    display: block;
-    width: 50px;
-    height: 50px;
-    position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  position: relative;
 }
 
 .loader:before,
 .loader:after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #fff;
-    transform: translate(-50%, -100%) scale(0);
-    animation: push_401 2s infinite linear;
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -100%) scale(0);
+  animation: push_401 2s infinite linear;
 }
 
 .loader:after {
-    animation-delay: 1s;
+  animation-delay: 1s;
 }
 
-@keyframes orbit-sm {
-    from {
-        transform: rotate(0deg) translateX(10em) rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg) translateX(10em) rotate(-360deg);
-    }
-}
-
-@keyframes orbit-md {
-    from {
-        transform: rotate(0deg) translateX(12em) rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg) translateX(12em) rotate(-360deg);
-    }
-}
-
-@keyframes orbit-lg {
-    from {
-        transform: rotate(0deg) translateX(15em) rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg) translateX(15em) rotate(-360deg);
-    }
-}
-
-@keyframes orbit-xl {
-    from {
-        transform: rotate(0deg) translateX(20em) rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg) translateX(20em) rotate(-360deg);
-    }
-}
-
-.animate-orbit-sm {
-    animation: orbit-sm 30s linear infinite;
-}
-
-.animate-orbit-md {
-    animation: orbit-md 30s linear infinite;
-}
-
-.animate-orbit-lg {
-    animation: orbit-lg 30s linear infinite;
-}
-
-.animate-orbit-xl {
-    animation: orbit-xl 30s linear infinite;
-}
-
-.animate-orbit:hover,
-.animate-orbit-sm:hover,
-.animate-orbit-md:hover,
-.animate-orbit-lg:hover,
-.animate-orbit-xl:hover {
-    animation-play-state: paused;
+@keyframes push_401 {
+  0% {
+    transform: translate(-50%, -100%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -100%) scale(2);
+    opacity: 0;
+  }
 }
