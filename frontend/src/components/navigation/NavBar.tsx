@@ -49,7 +49,7 @@ const NavBar: React.FC = () => {
     const links = [
         { href: "/", label: "Home", key: "" },
         { href: "/blog", label: "Blog", key: "blog" },
-        { href: "/contact", label: "Contact", key: "contact" },
+        { href: "/#contact", label: "Contact", key: null },
     ];
 
     return (
@@ -90,7 +90,7 @@ const NavBar: React.FC = () => {
                     }}
                 >
                     {links.map((link) => {
-                        const active = pageName === link.key;
+                        const active = link.key !== null && pageName === link.key;
                         return (
                             <a
                                 key={link.href}

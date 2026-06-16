@@ -1,16 +1,7 @@
 import type { ProjectsProps } from "data";
 
 const ArrowUpRight = () => (
-    <svg
-        width="15"
-        height="15"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-    >
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M7 17 17 7" />
         <path d="M7 7h10v10" />
     </svg>
@@ -23,271 +14,91 @@ const GithubMark = () => (
 );
 
 const LockIcon = () => (
-    <svg
-        width="11"
-        height="11"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="#52525b"
-        strokeWidth="2.4"
-    >
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#52525b" strokeWidth="2.4">
         <rect x="3" y="11" width="18" height="11" rx="2" />
         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
     </svg>
 );
 
 const Card = (project: ProjectsProps) => {
-    const {
-        num,
-        title,
-        kicker,
-        description,
-        highlights,
-        status,
-        statusColor,
-        domain,
-        image,
-        live,
-        repo,
-        tech,
-    } = project;
+    const { num, title, kicker, description, highlights, status, statusColor, domain, image, live, repo, tech } = project;
 
     return (
         <div
             data-card-wrap
-            style={{
-                height: "70vh",
-                display: "flex",
-                alignItems: "flex-start",
-                justifyContent: "center",
-                position: "sticky",
-                top: "6vh",
-                willChange: "transform",
-            }}
+            className="flex items-start justify-center mb-6 md:sticky md:top-[6vh] md:h-[70vh] md:will-change-transform md:mb-0"
         >
             <article
                 data-stack-card
-                className="psc-card"
+                className="origin-top w-[min(94vw,1120px)] min-h-[500px] flex flex-col md:flex-row items-stretch rounded-[26px] overflow-hidden border border-white/[0.09]"
                 style={{
-                    transformOrigin: "top center",
-                    width: "min(94vw, 1120px)",
-                    minHeight: "500px",
-                    display: "flex",
-                    alignItems: "stretch",
-                    borderRadius: "26px",
-                    overflow: "hidden",
                     background: "linear-gradient(150deg, #141417, #0e0e11)",
-                    border: "1px solid rgba(255,255,255,0.09)",
-                    boxShadow:
-                        "0 40px 90px -30px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.05)",
+                    boxShadow: "0 40px 90px -30px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.05)",
                 }}
             >
-                {/* info side */}
-                <div
-                    className="psc-info"
-                    style={{
-                        width: "43%",
-                        padding: "38px 40px",
-                        display: "flex",
-                        flexDirection: "column",
-                        position: "relative",
-                    }}
-                >
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "12px",
-                            marginBottom: "20px",
-                        }}
-                    >
-                        <span
-                            style={{
-                                fontSize: "15px",
-                                fontWeight: 600,
-                                color: "#948cb0",
-                                fontVariantNumeric: "tabular-nums",
-                                letterSpacing: "0.05em",
-                            }}
-                        >
+                {/* Info side */}
+                <div className="w-full md:w-[43%] p-[28px_24px] md:p-[38px_40px] flex flex-col relative">
+                    <div className="flex items-center gap-3 mb-5">
+                        <span className="text-[15px] font-semibold text-[#948cb0] tabular-nums tracking-[0.05em]">
                             {num}
                         </span>
-                        <span style={{ flex: 1 }} />
-                        <span
-                            style={{
-                                display: "inline-flex",
-                                alignItems: "center",
-                                gap: "7px",
-                                padding: "5px 11px",
-                                borderRadius: "999px",
-                                background: "rgba(255,255,255,0.05)",
-                                border: "1px solid rgba(255,255,255,0.10)",
-                                fontSize: "11px",
-                                fontWeight: 500,
-                                letterSpacing: "0.06em",
-                                color: "#d4d4d8",
-                            }}
-                        >
+                        <span className="flex-1" />
+                        <span className="inline-flex items-center gap-[7px] px-[11px] py-[5px] rounded-full bg-white/5 border border-white/10 text-[11px] font-medium tracking-[0.06em] text-[#d4d4d8]">
                             <span
-                                style={{
-                                    width: "7px",
-                                    height: "7px",
-                                    borderRadius: "50%",
-                                    background: statusColor,
-                                    boxShadow: `0 0 8px ${statusColor}`,
-                                }}
+                                className="w-[7px] h-[7px] rounded-full"
+                                style={{ background: statusColor, boxShadow: `0 0 8px ${statusColor}` }}
                             />
                             {status}
                         </span>
                     </div>
 
-                    <h2
-                        style={{
-                            fontSize: "34px",
-                            lineHeight: 1.05,
-                            fontWeight: 700,
-                            letterSpacing: "-0.02em",
-                            marginBottom: "7px",
-                        }}
-                    >
+                    <h2 className="text-[34px] leading-[1.05] font-bold tracking-[-0.02em] mb-[7px]">
                         {title}
                     </h2>
-                    <p
-                        style={{
-                            fontSize: "14px",
-                            fontWeight: 500,
-                            color: "#a78bfa",
-                            marginBottom: "14px",
-                            letterSpacing: "0.01em",
-                        }}
-                    >
+                    <p className="text-sm font-medium text-violet-400 mb-[14px] tracking-[0.01em]">
                         {kicker}
                     </p>
-                    <p
-                        style={{
-                            fontSize: "14.5px",
-                            lineHeight: 1.6,
-                            color: "#a1a1aa",
-                            fontWeight: 300,
-                            marginBottom: "18px",
-                        }}
-                    >
+                    <p className="text-[14.5px] leading-relaxed text-zinc-400 font-light mb-[18px]">
                         {description}
                     </p>
 
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            gap: "8px",
-                            marginBottom: "18px",
-                        }}
-                    >
+                    <div className="flex flex-wrap gap-2 mb-[18px]">
                         {highlights.map((h) => (
                             <span
                                 key={h}
-                                style={{
-                                    padding: "5px 11px",
-                                    borderRadius: "8px",
-                                    background: "rgba(124,58,237,0.10)",
-                                    border: "1px solid rgba(139,92,246,0.22)",
-                                    fontSize: "12px",
-                                    fontWeight: 400,
-                                    color: "#c7bdf0",
-                                }}
+                                className="px-[11px] py-[5px] rounded-lg bg-[rgba(124,58,237,0.10)] border border-violet-500/[0.22] text-[12px] text-[#c7bdf0]"
                             >
                                 {h}
                             </span>
                         ))}
                     </div>
 
-                    <div style={{ marginTop: "auto" }}>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "7px",
-                                marginBottom: "12px",
-                            }}
-                        >
-                            <span
-                                style={{
-                                    fontSize: "10px",
-                                    fontWeight: 600,
-                                    letterSpacing: "0.18em",
-                                    color: "#52525b",
-                                }}
-                            >
+                    <div className="mt-auto">
+                        <div className="flex items-center gap-[7px] mb-3">
+                            <span className="text-[10px] font-semibold tracking-[0.18em] text-zinc-600">
                                 BUILT WITH
                             </span>
-                            <span
-                                style={{
-                                    flex: 1,
-                                    height: "1px",
-                                    background: "rgba(255,255,255,0.07)",
-                                }}
-                            />
+                            <span className="flex-1 h-px bg-white/[0.07]" />
                         </div>
-                        <div
-                            style={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                gap: "8px",
-                                marginBottom: "20px",
-                            }}
-                        >
+                        <div className="flex flex-wrap gap-2 mb-5">
                             {tech.map((t) => (
                                 <span
                                     key={t.name}
                                     title={t.name}
-                                    style={{
-                                        display: "inline-flex",
-                                        alignItems: "center",
-                                        gap: "7px",
-                                        padding: "6px 10px 6px 8px",
-                                        borderRadius: "9px",
-                                        background: "rgba(255,255,255,0.04)",
-                                        border: "1px solid rgba(255,255,255,0.08)",
-                                        fontSize: "12px",
-                                        fontWeight: 400,
-                                        color: "#d4d4d8",
-                                    }}
+                                    className="inline-flex items-center gap-[7px] pl-2 pr-[10px] py-[6px] rounded-[9px] bg-white/[0.04] border border-white/[0.08] text-[12px] text-[#d4d4d8]"
                                 >
-                                    <img
-                                        src={t.icon}
-                                        alt={t.name}
-                                        style={{
-                                            width: "15px",
-                                            height: "15px",
-                                            objectFit: "contain",
-                                        }}
-                                    />
+                                    <img src={t.icon} alt={t.name} className="w-[15px] h-[15px] object-contain" />
                                     {t.name}
                                 </span>
                             ))}
                         </div>
 
-                        <div style={{ display: "flex", gap: "12px" }}>
+                        <div className="flex gap-3">
                             <a
                                 href={live.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="psc-cta-primary"
-                                style={{
-                                    flex: 1,
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    gap: "9px",
-                                    padding: "13px 18px",
-                                    borderRadius: "12px",
-                                    background: "#fafafa",
-                                    color: "#18181b",
-                                    fontSize: "14px",
-                                    fontWeight: 600,
-                                    textDecoration: "none",
-                                    boxShadow: "0 8px 22px -12px rgba(0,0,0,0.7)",
-                                }}
+                                className="flex-1 inline-flex items-center justify-center gap-[9px] py-[13px] px-[18px] rounded-xl bg-[#fafafa] text-[#18181b] text-sm font-semibold no-underline shadow-[0_8px_22px_-12px_rgba(0,0,0,0.7)] transition duration-[180ms] hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_14px_30px_-12px_rgba(0,0,0,0.85)]"
                             >
                                 {live.label}
                                 <ArrowUpRight />
@@ -297,21 +108,7 @@ const Card = (project: ProjectsProps) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title="View source on GitHub"
-                                className="psc-cta-ghost"
-                                style={{
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    gap: "8px",
-                                    padding: "13px 18px",
-                                    borderRadius: "12px",
-                                    background: "rgba(255,255,255,0.05)",
-                                    border: "1px solid rgba(255,255,255,0.12)",
-                                    color: "#e4e4e7",
-                                    fontSize: "14px",
-                                    fontWeight: 500,
-                                    textDecoration: "none",
-                                }}
+                                className="inline-flex items-center justify-center gap-2 py-[13px] px-[18px] rounded-xl bg-white/5 border border-white/[0.12] text-[#e4e4e7] text-sm font-medium no-underline transition duration-[180ms] hover:bg-white/10 hover:border-white/[0.22]"
                             >
                                 <GithubMark />
                                 Code
@@ -320,122 +117,29 @@ const Card = (project: ProjectsProps) => {
                     </div>
                 </div>
 
-                {/* image side: browser-framed product shot */}
-                <div
-                    className="psc-media"
-                    style={{
-                        width: "57%",
-                        position: "relative",
-                        padding: "30px 30px 0 8px",
-                        display: "flex",
-                        alignItems: "stretch",
-                    }}
-                >
-                    <div
-                        style={{
-                            position: "relative",
-                            flex: 1,
-                            borderRadius: "14px 14px 0 0",
-                            overflow: "hidden",
-                            border: "1px solid rgba(255,255,255,0.10)",
-                            borderBottom: "none",
-                            background: "#1a1a1e",
-                            boxShadow: "0 30px 60px -30px rgba(0,0,0,0.9)",
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    >
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "8px",
-                                padding: "11px 14px",
-                                background: "rgba(20,20,24,0.96)",
-                                borderBottom: "1px solid rgba(255,255,255,0.06)",
-                                flexShrink: 0,
-                            }}
-                        >
-                            <span
-                                style={{
-                                    width: "11px",
-                                    height: "11px",
-                                    borderRadius: "50%",
-                                    background: "#ff5f57",
-                                }}
-                            />
-                            <span
-                                style={{
-                                    width: "11px",
-                                    height: "11px",
-                                    borderRadius: "50%",
-                                    background: "#febc2e",
-                                }}
-                            />
-                            <span
-                                style={{
-                                    width: "11px",
-                                    height: "11px",
-                                    borderRadius: "50%",
-                                    background: "#28c840",
-                                }}
-                            />
-                            <div
-                                style={{
-                                    marginLeft: "10px",
-                                    flex: 1,
-                                    maxWidth: "280px",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "7px",
-                                    padding: "5px 12px",
-                                    borderRadius: "7px",
-                                    background: "rgba(255,255,255,0.05)",
-                                    border: "1px solid rgba(255,255,255,0.06)",
-                                }}
-                            >
+                {/* Media side */}
+                <div className="group w-full md:w-[57%] relative flex items-stretch px-5 py-0 md:pt-[30px] md:pr-[30px] md:pb-0 md:pl-2 min-h-[280px] md:min-h-0">
+                    <div className="relative flex-1 rounded-t-[14px] overflow-hidden border border-white/10 border-b-0 bg-[#1a1a1e] flex flex-col shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)]">
+                        {/* Browser chrome */}
+                        <div className="flex items-center gap-2 px-[14px] py-[11px] bg-[rgba(20,20,24,0.96)] border-b border-white/[0.06] shrink-0">
+                            <span className="w-[11px] h-[11px] rounded-full bg-[#ff5f57]" />
+                            <span className="w-[11px] h-[11px] rounded-full bg-[#febc2e]" />
+                            <span className="w-[11px] h-[11px] rounded-full bg-[#28c840]" />
+                            <div className="ml-[10px] flex-1 max-w-[280px] flex items-center gap-[7px] px-3 py-[5px] rounded-[7px] bg-white/5 border border-white/[0.06]">
                                 <LockIcon />
-                                <span
-                                    style={{
-                                        fontSize: "11px",
-                                        color: "#8b8b93",
-                                        letterSpacing: "0.02em",
-                                    }}
-                                >
+                                <span className="text-[11px] text-[#8b8b93] tracking-[0.02em]">
                                     {domain}
                                 </span>
                             </div>
                         </div>
-                        <div
-                            style={{
-                                flex: 1,
-                                overflow: "hidden",
-                                position: "relative",
-                            }}
-                        >
+                        {/* Screenshot */}
+                        <div className="flex-1 overflow-hidden relative">
                             <img
                                 src={image}
                                 alt={`${title} screenshot`}
-                                className="psc-shot"
-                                style={{
-                                    position: "absolute",
-                                    inset: 0,
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    objectPosition: "top center",
-                                    transition: "transform 6s ease-out",
-                                }}
+                                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-[6000ms] ease-out md:group-hover:translate-y-[calc(-100%_+_360px)]"
                             />
-                            <div
-                                style={{
-                                    position: "absolute",
-                                    inset: 0,
-                                    pointerEvents: "none",
-                                    boxShadow:
-                                        "inset 0 -40px 60px -30px rgba(8,8,10,0.7)",
-                                }}
-                            />
+                            <div className="absolute inset-0 pointer-events-none shadow-[inset_0_-40px_60px_-30px_rgba(8,8,10,0.7)]" />
                         </div>
                     </div>
                 </div>

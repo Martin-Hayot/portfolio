@@ -23,7 +23,7 @@ const NavigationSidebar = ({ setOpen }: { setOpen: Function }) => {
                     </li>
                     <li>
                         <a
-                            href="/contact"
+                            href="/#contact"
                             className="text-primary hover:text-accent transition-all duration-100 ease-out"
                         >
                             Contact me
