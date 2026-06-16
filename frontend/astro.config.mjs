@@ -8,16 +8,16 @@ import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://martinhayot.com",
-  output: "hybrid",
-  adapter: vercel(),
-  markdown: {
-    processor: unified({
-      remarkPlugins: [
-        [remarkToc, { heading: "Table of Contents", maxDepth: 3 }],
-      ],
-      rehypePlugins: [rehypeAccessibleEmojis],
-    }),
-  },
-  integrations: [vue(), react()],
+    site: "https://martinhayot.com",
+    output: "static",
+    adapter: vercel(),
+    markdown: {
+        processor: unified({
+            remarkPlugins: [
+                [remarkToc, { heading: "Table of Contents", maxDepth: 3 }],
+            ],
+            rehypePlugins: [rehypeAccessibleEmojis],
+        }),
+    },
+    integrations: [vue(), react()],
 });
