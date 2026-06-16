@@ -4,10 +4,13 @@ import remarkToc from "remark-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import vue from "@astrojs/vue";
 import react from "@astrojs/react";
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://martinhayot.com",
+  output: "hybrid",
+  adapter: vercel(),
   markdown: {
     processor: unified({
       remarkPlugins: [
