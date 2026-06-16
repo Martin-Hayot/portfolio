@@ -28,7 +28,7 @@ import Footer from "@/components/Footer.astro";
             import "/src/scripts/lenis.ts";
         </script>
         <Loader client:load />
-        <NavBar transition:name="nav" client:only="react" />
+        <NavBar transition:persist="navbar" client:only="react" />
         <slot />
         <Footer />
 

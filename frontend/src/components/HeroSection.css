@@ -33,3 +33,58 @@
     opacity: 0;
   }
 }
+
+/* ===== Hero (Mission Control) ===== */
+.hero-grotesk {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+@keyframes ringspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.hero-cta-primary {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.hero-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(139, 92, 246, 0.35);
+}
+.hero-cta-ghost {
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+.hero-cta-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* hide the porthole on narrow screens so the headline stays readable */
+@media (max-width: 900px) {
+  .hero-porthole {
+    display: none !important;
+  }
+}

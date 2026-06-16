@@ -46,58 +46,72 @@ const NavBar: React.FC = () => {
         };
     }, []);
 
+    const links = [
+        { href: "/", label: "Home", key: "" },
+        { href: "/blog", label: "Blog", key: "blog" },
+        { href: "/contact", label: "Contact", key: "contact" },
+    ];
+
     return (
         <motion.div
             ref={ref}
             animate={controls}
-            className={`fixed overflow-hidden top-0 w-full z-30`}
+            className="fixed overflow-hidden top-0 w-full z-30"
         >
-            <nav className="flex poppins-regular items-center text-xl justify-between text-white py-2 px-2 md:px-6 mx-5 md:mx-10">
-                <a
-                    href="/"
-                    className="z-30 text-2xl md:text-3xl ease-out transition-all duration-300"
-                >
-                    <img
-                        src="/astro_earth.png"
-                        alt="Logo"
-                        className="w-20 h-20"
-                    />
+            <style>{`
+                .mh-nav-link { display:inline-flex; align-items:center; gap:9px; color:rgba(255,255,255,0.55); text-decoration:none; transition:color .25s ease; }
+                .mh-nav-link:hover { color:#fff; }
+                .mh-nav-link.is-active { color:#fff; }
+            `}</style>
+            <nav
+                className="flex items-center justify-between text-white py-6 px-6 md:px-12"
+                style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}
+            >
+                <a href="/" className="z-30" style={{ textDecoration: "none" }}>
+                    <span
+                        style={{
+                            fontSize: "26px",
+                            fontWeight: 700,
+                            letterSpacing: "-0.01em",
+                            color: "#fff",
+                        }}
+                    >
+                        MH<span style={{ color: "#8B5CF6" }}>.</span>
+                    </span>
                 </a>
-                <div className="hidden lg:flex space-x-10 lg:space-x-12 xl:space-x-16">
-                    <motion.a
-                        style={{
-                            color:
-                                pageName === ""
-                                    ? "white"
-                                    : "rgba(255,255,255,0.6)",
-                        }}
-                        href="/"
-                    >
-                        Home
-                    </motion.a>
-
-                    <motion.a
-                        style={{
-                            color:
-                                pageName === "blog"
-                                    ? "white"
-                                    : "rgba(255,255,255,0.6)",
-                        }}
-                        href="/blog"
-                    >
-                        Blog
-                    </motion.a>
-                    <motion.a
-                        style={{
-                            color:
-                                pageName === "contact"
-                                    ? "white"
-                                    : "rgba(255,255,255,0.6)",
-                        }}
-                        href="/contact"
-                    >
-                        Contact me
-                    </motion.a>
+                <div
+                    className="hidden lg:flex items-center"
+                    style={{
+                        gap: "clamp(22px, 2.6vw, 40px)",
+                        fontSize: "13px",
+                        fontWeight: 600,
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                    }}
+                >
+                    {links.map((link) => {
+                        const active = pageName === link.key;
+                        return (
+                            <a
+                                key={link.href}
+                                href={link.href}
+                                className={`mh-nav-link${active ? " is-active" : ""}`}
+                            >
+                                {active && (
+                                    <span
+                                        style={{
+                                            width: "6px",
+                                            height: "6px",
+                                            borderRadius: "50%",
+                                            background: "#8B5CF6",
+                                            boxShadow: "0 0 10px #8B5CF6",
+                                        }}
+                                    />
+                                )}
+                                {link.label}
+                            </a>
+                        );
+                    })}
                 </div>
                 <div className="lg:hidden z-20">
                     <MobileToggle />
