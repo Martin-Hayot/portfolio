@@ -39,6 +39,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     id="contact-form"
                     class="flex flex-wrap gap-4"
                 >
+                    <div aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
+                        <label>Leave this empty <input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+                    </div>
                     <input
                         name="name"
                         type="text"
@@ -106,6 +109,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     name: data.get("name"),
                     email: data.get("email"),
                     message: data.get("message"),
+                    website: data.get("website"),
                 }),
             });
 
