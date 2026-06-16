@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
-import tailwind from "@astrojs/tailwind";
 import vue from "@astrojs/vue";
 import react from "@astrojs/react";
 
@@ -9,14 +9,12 @@ import react from "@astrojs/react";
 export default defineConfig({
   site: "https://martinhayot.com",
   markdown: {
-    remarkPlugins: [[remarkToc, { heading: "Table of Contents", maxDepth: 3 }]],
-    rehypePlugins: [rehypeAccessibleEmojis],
-  },
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
+    processor: unified({
+      remarkPlugins: [
+        [remarkToc, { heading: "Table of Contents", maxDepth: 3 }],
+      ],
+      rehypePlugins: [rehypeAccessibleEmojis],
     }),
-    vue(),
-    react(),
-  ],
+  },
+  integrations: [vue(), react()],
 });
