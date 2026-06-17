@@ -387,7 +387,7 @@ const HeroSection = () => {
                         </span>
                     </a>
                     <a
-                        href="/contact"
+                        href="#contact"
                         className="hero-cta-ghost"
                         style={{
                             display: "inline-flex",
