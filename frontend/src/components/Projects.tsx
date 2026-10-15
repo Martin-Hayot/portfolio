@@ -10,63 +10,99 @@ const Projects = () => {
         const stack = stackRef.current;
         if (!stack) return;
 
-        const update = () => {
-            const wraps = stack.querySelectorAll<HTMLElement>("[data-card-wrap]");
-            const cards = stack.querySelectorAll<HTMLElement>("[data-stack-card]");
-            const n = cards.length;
-            if (!n) return;
+        const wraps = Array.from(stack.querySelectorAll<HTMLElement>("[data-card-wrap]"));
+        const cards = Array.from(stack.querySelectorAll<HTMLElement>("[data-stack-card]"));
+        const shades = Array.from(stack.querySelectorAll<HTMLElement>("[data-stack-shade]"));
+        const n = cards.length;
+        if (!n) return;
 
-            if (window.innerWidth < 768) {
-                cards.forEach((c) => { c.style.transform = ""; c.style.filter = ""; c.style.zIndex = ""; });
-                wraps.forEach((w) => { w.style.top = ""; });
-                return;
-            }
+        const peek = 30;
+        const step = 0.09;
+        const minScale = 0.82;
 
-            const vh = window.innerHeight;
-            const gapTop = Math.round(vh * 0.07);
-            const peek = 30;
-            const step = 0.09;
-            const minScale = 0.82;
+        let desktop = false;
+        // Scroll offset (from the top of the stack) at which each card sticks
+        let stickAt: number[] = [];
 
-            const rect = stack.getBoundingClientRect();
-            const scrollable = Math.max(1, stack.offsetHeight - vh);
-            let progress = -rect.top / scrollable;
-            progress = Math.max(0, Math.min(1, progress));
-            let frontF = progress * n;
-            frontF = Math.max(0, Math.min(n - 1, frontF));
+        // Things that only change on resize: kept out of the per-frame path
+        const layout = () => {
+            desktop = window.innerWidth >= 768;
+            const gapTop = Math.round(window.innerHeight * 0.07);
+
+            // Natural position of each card in the flow, minus where it sticks
+            let offset = parseFloat(getComputedStyle(stack).paddingTop) || 0;
+            stickAt = wraps.map((wrap, i) => {
+                const at = offset - (gapTop + i * peek);
+                offset += wrap.offsetHeight;
+                return at;
+            });
 
             cards.forEach((card, i) => {
-                const wrap = wraps[i];
-                wrap.style.top = gapTop + i * peek + "px";
+                wraps[i].style.top = desktop ? gapTop + i * peek + "px" : "";
+                card.style.zIndex = desktop ? String(i + 1) : "";
+                if (!desktop) {
+                    card.style.transform = "";
+                    shades[i].style.opacity = "";
+                }
+            });
+        };
 
+        const render = () => {
+            frame = 0;
+            if (!desktop) return;
+
+            // frontF = i exactly when card i sticks, so each card shrinks
+            // in step with the next one sliding over it
+            const scrolled = -stack.getBoundingClientRect().top;
+            let frontF = 0;
+            if (scrolled >= stickAt[n - 1]) frontF = n - 1;
+            else {
+                for (let i = 0; i < n - 1; i++) {
+                    if (scrolled < stickAt[i + 1]) {
+                        const span = Math.max(1, stickAt[i + 1] - stickAt[i]);
+                        frontF = i + Math.max(0, (scrolled - stickAt[i]) / span);
+                        break;
+                    }
+                }
+            }
+
+            cards.forEach((card, i) => {
                 const depth = Math.max(0, frontF - i);
                 const scale = Math.max(minScale, 1 - depth * step);
                 const ty = -Math.min(depth, 4) * 13;
                 card.style.transform = `translateY(${ty}px) scale(${scale})`;
-                card.style.filter = depth > 0
-                    ? `brightness(${Math.max(0.55, 1 - depth * 0.24)})`
-                    : "none";
-                card.style.zIndex = String(i + 1);
+                shades[i].style.opacity = String(Math.min(0.45, depth * 0.24));
             });
         };
 
-        window.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update);
-        update();
-        const raf = requestAnimationFrame(update);
-        const t = window.setTimeout(update, 300);
+        // At most one render per frame, however many scroll events fire
+        let frame = 0;
+        const schedule = () => {
+            if (!frame) frame = requestAnimationFrame(render);
+        };
+        const onResize = () => {
+            layout();
+            schedule();
+        };
+
+        // Catches height changes from late-loading images and fonts too
+        const resizeObserver = new ResizeObserver(onResize);
+        resizeObserver.observe(stack);
+        window.addEventListener("scroll", schedule, { passive: true });
+        window.addEventListener("resize", onResize);
+        onResize();
 
         return () => {
-            window.removeEventListener("scroll", update);
-            window.removeEventListener("resize", update);
-            cancelAnimationFrame(raf);
-            window.clearTimeout(t);
+            resizeObserver.disconnect();
+            window.removeEventListener("scroll", schedule);
+            window.removeEventListener("resize", onResize);
+            cancelAnimationFrame(frame);
         };
     }, []);
 
     return (
         <section id="projects" className="relative isolate">
-            {/* Nebula + stars — clipped to this section */}
+            {/* Nebula + stars, clipped to this section */}
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none z-0">
                 <div
                     className="absolute inset-0"

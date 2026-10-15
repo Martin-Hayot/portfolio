@@ -37,6 +37,7 @@ const Starfield = memo((props: Props) => {
     let w = window.innerWidth;
     let h = window.innerHeight;
     let isRunning = true;
+    let isVisible = true;
 
     const setCanvasExtents = () => {
       const dpr = window.devicePixelRatio || 1;
@@ -111,7 +112,7 @@ const Starfield = memo((props: Props) => {
     };
 
     const tick = (time: number) => {
-      if (!isRunning) return;
+      if (!isRunning || !isVisible) return;
 
       const elapsed = time - prevTime;
       prevTime = time;
@@ -145,9 +146,20 @@ const Starfield = memo((props: Props) => {
 
     animationFrameRef.current = requestAnimationFrame(init);
 
+    // Stop drawing while the canvas is scrolled out of view
+    const observer = new IntersectionObserver(([entry]) => {
+      const wasVisible = isVisible;
+      isVisible = entry.isIntersecting;
+      if (isVisible && !wasVisible && isRunning) {
+        animationFrameRef.current = requestAnimationFrame(init);
+      }
+    });
+    observer.observe(canvas);
+
     // Cleanup function
     return () => {
       isRunning = false;
+      observer.disconnect();
       if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current);
         animationFrameRef.current = null;

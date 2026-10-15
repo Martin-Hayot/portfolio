@@ -26,11 +26,11 @@ const Card = (project: ProjectsProps) => {
     return (
         <div
             data-card-wrap
-            className="flex items-start justify-center mb-6 md:sticky md:top-[6vh] md:h-[70vh] md:will-change-transform md:mb-0"
+            className="flex items-start justify-center mb-6 md:sticky md:top-[6vh] md:h-[70vh] md:mb-0"
         >
             <article
                 data-stack-card
-                className="origin-top w-[min(94vw,1120px)] min-h-[500px] flex flex-col md:flex-row items-stretch rounded-[26px] overflow-hidden border border-white/[0.09]"
+                className="relative origin-top md:will-change-transform w-[min(94vw,1120px)] min-h-[500px] flex flex-col md:flex-row items-stretch rounded-[26px] overflow-hidden border border-white/[0.09]"
                 style={{
                     background: "linear-gradient(150deg, #141417, #0e0e11)",
                     boxShadow: "0 40px 90px -30px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.05)",
@@ -94,31 +94,35 @@ const Card = (project: ProjectsProps) => {
                         </div>
 
                         <div className="flex gap-3">
-                            <a
-                                href={live.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex-1 inline-flex items-center justify-center gap-[9px] py-[13px] px-[18px] rounded-xl bg-[#fafafa] text-[#18181b] text-sm font-semibold no-underline shadow-[0_8px_22px_-12px_rgba(0,0,0,0.7)] transition duration-[180ms] hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_14px_30px_-12px_rgba(0,0,0,0.85)]"
-                            >
-                                {live.label}
-                                <ArrowUpRight />
-                            </a>
-                            <a
-                                href={repo}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                title="View source on GitHub"
-                                className="inline-flex items-center justify-center gap-2 py-[13px] px-[18px] rounded-xl bg-white/5 border border-white/[0.12] text-[#e4e4e7] text-sm font-medium no-underline transition duration-[180ms] hover:bg-white/10 hover:border-white/[0.22]"
-                            >
-                                <GithubMark />
-                                Code
-                            </a>
+                            {live && (
+                                <a
+                                    href={live.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-1 inline-flex items-center justify-center gap-[9px] py-[13px] px-[18px] rounded-xl bg-[#fafafa] text-[#18181b] text-sm font-semibold no-underline shadow-[0_8px_22px_-12px_rgba(0,0,0,0.7)] transition duration-[180ms] hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_14px_30px_-12px_rgba(0,0,0,0.85)]"
+                                >
+                                    {live.label}
+                                    <ArrowUpRight />
+                                </a>
+                            )}
+                            {repo && (
+                                <a
+                                    href={repo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title="View source on GitHub"
+                                    className={`${live ? "" : "flex-1 "}inline-flex items-center justify-center gap-2 py-[13px] px-[18px] rounded-xl bg-white/5 border border-white/[0.12] text-[#e4e4e7] text-sm font-medium no-underline transition duration-[180ms] hover:bg-white/10 hover:border-white/[0.22]`}
+                                >
+                                    <GithubMark />
+                                    Code
+                                </a>
+                            )}
                         </div>
                     </div>
                 </div>
 
                 {/* Media side */}
-                <div className="group w-full md:w-[57%] relative flex items-stretch px-5 py-0 md:pt-[30px] md:pr-[30px] md:pb-0 md:pl-2 min-h-[280px] md:min-h-0">
+                <div className="w-full md:w-[57%] relative flex items-stretch px-5 py-0 md:pt-[30px] md:pr-[30px] md:pb-0 md:pl-2 min-h-[280px] md:min-h-0">
                     <div className="relative flex-1 rounded-t-[14px] overflow-hidden border border-white/10 border-b-0 bg-[#1a1a1e] flex flex-col shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)]">
                         {/* Browser chrome */}
                         <div className="flex items-center gap-2 px-[14px] py-[11px] bg-[rgba(20,20,24,0.96)] border-b border-white/[0.06] shrink-0">
@@ -137,12 +141,18 @@ const Card = (project: ProjectsProps) => {
                             <img
                                 src={image}
                                 alt={`${title} screenshot`}
-                                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-[6000ms] ease-out md:group-hover:translate-y-[calc(-100%_+_360px)]"
+                                className="absolute inset-0 w-full h-full object-cover object-top"
                             />
                             <div className="absolute inset-0 pointer-events-none shadow-[inset_0_-40px_60px_-30px_rgba(8,8,10,0.7)]" />
                         </div>
                     </div>
                 </div>
+                {/* Darkens the card as it moves back in the stack (cheaper than a CSS filter) */}
+                <div
+                    data-stack-shade
+                    aria-hidden="true"
+                    className="absolute inset-0 z-10 bg-black opacity-0 pointer-events-none md:will-change-[opacity]"
+                />
             </article>
         </div>
     );

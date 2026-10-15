@@ -28,7 +28,7 @@ const HeroSection = () => {
                 color: "#fff",
             }}
         >
-            {/* Warp starfield (the site's existing component — same algorithm) */}
+            {/* Warp starfield (the site's existing component, same algorithm) */}
             <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
                 <StarField
                     starCount={4000}
