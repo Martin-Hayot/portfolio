@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { motion, useInView, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
     Cpu,
@@ -67,6 +68,130 @@ const interests = [
     { name: "Hiking", icon: <Mountain className="w-4 h-4" /> },
     { name: "Linux Ricing", icon: <WandSparkles className="w-4 h-4" /> },
 ];
+
+// Commands typed out in the terminal, each followed by its output
+const terminalScript = [
+    {
+        command: "whoami",
+        output: (
+            <>
+                I'm a Master's student in{" "}
+                <span className="text-orange-400">
+                    Computer Systems Architecture
+                </span>{" "}
+                at Henallux and UNamur. Focusing on distributed systems,
+                scalability, and robust software design.
+            </>
+        ),
+    },
+    {
+        command: "cat passion.txt",
+        output: (
+            <>
+                I bridge the gap between complex backend logic and clean user
+                interfaces. While I can build fluid frontend experiences, my
+                true passion lies in{" "}
+                <span className="text-orange-400">backend engineering</span>,
+                optimizing performance and architecting systems that last &
+                scale.
+            </>
+        ),
+    },
+];
+
+// ms per typed character, before an output appears, and between commands
+const TYPE_SPEED = 55;
+const OUTPUT_PAUSE = 300;
+const NEXT_COMMAND_PAUSE = 700;
+
+const Caret = () => (
+    <span className="inline-block w-2 h-4 -mb-0.5 ml-0.5 bg-purple-400 animate-pulse" />
+);
+
+const TerminalScript = () => {
+    const ref = useRef<HTMLDivElement>(null);
+    const inView = useInView(ref, { once: true, amount: 0.5 });
+    const reduceMotion = useReducedMotion();
+
+    // Characters typed per command, and how many outputs are shown
+    const [typed, setTyped] = useState(() => terminalScript.map(() => 0));
+    const [shown, setShown] = useState(0);
+
+    useEffect(() => {
+        if (!inView) return;
+        if (reduceMotion) {
+            setTyped(terminalScript.map((line) => line.command.length));
+            setShown(terminalScript.length);
+            return;
+        }
+
+        const timers: ReturnType<typeof setTimeout>[] = [];
+        let at = 0;
+        terminalScript.forEach(({ command }, line) => {
+            for (let c = 1; c <= command.length; c++) {
+                at += TYPE_SPEED;
+                timers.push(
+                    setTimeout(
+                        () =>
+                            setTyped((prev) =>
+                                prev.map((n, i) => (i === line ? c : n)),
+                            ),
+                        at,
+                    ),
+                );
+            }
+            at += OUTPUT_PAUSE;
+            timers.push(setTimeout(() => setShown(line + 1), at));
+            at += NEXT_COMMAND_PAUSE;
+        });
+        return () => timers.forEach(clearTimeout);
+    }, [inView, reduceMotion]);
+
+    const done = shown === terminalScript.length;
+
+    // Everything is rendered from the start (just invisible) so the
+    // terminal keeps its final height and nothing below jumps
+    return (
+        <div ref={ref}>
+            {terminalScript.map(({ command, output }, line) => (
+                <div key={command} className={shown < line ? "invisible" : ""}>
+                    <p className="mb-4">
+                        <span className="text-purple-400 font-bold">
+                            ${" "}
+                            {command.slice(0, typed[line])}
+                            {shown === line && <Caret />}
+                            <span className="invisible">
+                                {command.slice(typed[line])}
+                            </span>
+                        </span>
+                    </p>
+                    <motion.p
+                        initial={false}
+                        animate={
+                            shown > line
+                                ? { opacity: 1, y: 0 }
+                                : { opacity: 0, y: 6 }
+                        }
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="text-gray-300 mb-6 border-l-2 border-white/10 pl-4"
+                    >
+                        {output}
+                    </motion.p>
+                </div>
+            ))}
+
+            <div
+                className={cn(
+                    "flex gap-2 items-center text-green-400 mt-8 animate-pulse",
+                    !done && "invisible",
+                )}
+            >
+                <span className="font-bold">{">"}</span>
+                <span className="w-2 h-4 bg-green-400 block" />
+            </div>
+        </div>
+    );
+};
 
 const TerminalWindow = ({
     children,
@@ -177,42 +302,7 @@ const AboutSection = () => {
                         </div>
 
                         <TerminalWindow>
-                            <p className="mb-4">
-                                <span className="text-purple-400 font-bold">
-                                    $ whoami
-                                </span>
-                            </p>
-                            <p className="text-gray-300 mb-6 border-l-2 border-white/10 pl-4">
-                                I'm a Master's student in{" "}
-                                <span className="text-orange-400">
-                                    Computer Systems Architecture
-                                </span>{" "}
-                                at Henallux and UNamur. Focusing on distributed
-                                systems, scalability, and robust software
-                                design.
-                            </p>
-
-                            <p className="mb-4">
-                                <span className="text-purple-400 font-bold">
-                                    $ cat passion.txt
-                                </span>
-                            </p>
-                            <p className="text-gray-300 mb-6 border-l-2 border-white/10 pl-4">
-                                I bridge the gap between complex backend logic
-                                and clean user interfaces. While I can build
-                                fluid frontend experiences, my true passion lies
-                                in{" "}
-                                <span className="text-orange-400">
-                                    backend engineering
-                                </span>
-                                , optimizing performance and architecting
-                                systems that last & scale.
-                            </p>
-
-                            <div className="flex gap-2 items-center text-green-400 mt-8 animate-pulse">
-                                <span className="font-bold">{">"}</span>
-                                <span className="w-2 h-4 bg-green-400 block" />
-                            </div>
+                            <TerminalScript />
                         </TerminalWindow>
                     </motion.div>
                 </div>

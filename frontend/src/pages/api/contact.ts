@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
+import { renderContactEmail } from "../../lib/contactEmail";
 
 export const prerender = false;
 
@@ -23,14 +24,23 @@ export const POST: APIRoute = async ({ request }) => {
             return json({ error: "All fields are required." }, 400);
         }
 
+        // In dev without a key, skip the email so the form flow can still be tested
+        if (import.meta.env.DEV && !import.meta.env.RESEND_API_KEY) {
+            console.info("[contact] RESEND_API_KEY not set, email skipped:", { name, email, message });
+            return json({ success: true }, 200);
+        }
+
         const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
         const { error } = await resend.emails.send({
             from: "Portfolio Contact <noreply@martinhayot.com>",
             to: "martin.hayot@gmail.com",
             replyTo: email,
-            subject: `New message from ${name}`,
-            text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+            ...renderContactEmail({
+                name: name.trim(),
+                email: email.trim(),
+                message: message.trim(),
+            }),
         });
 
         if (error) {

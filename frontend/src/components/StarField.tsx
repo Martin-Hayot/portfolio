@@ -6,7 +6,16 @@ interface Props {
   backgroundColor?: string;
   starColor?: [number, number, number];
   starCount?: number;
+  // Speed multiplier read every frame (1 = cruise), so callers can warp
+  // the field without re-running the effect and regenerating the stars
+  warpRef?: React.RefObject<number>;
 }
+
+// Stars are drawn in a few batched paths per brightness level instead of
+// one fillStyle change per star
+const BUCKETS = 5;
+// Star size in px, before depth is applied
+const BASE_SIZE = 1.3;
 
 const Starfield = memo((props: Props) => {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -17,6 +26,7 @@ const Starfield = memo((props: Props) => {
     backgroundColor = "black",
     starColor = [255, 255, 255],
     starCount = 5000,
+    warpRef,
   } = props;
 
   useEffect(() => {
@@ -33,6 +43,10 @@ const Starfield = memo((props: Props) => {
       console.error("Could not get 2d context from canvas element");
       return;
     }
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     let w = window.innerWidth;
     let h = window.innerHeight;
@@ -71,24 +85,21 @@ const Starfield = memo((props: Props) => {
 
     const stars = makeStars(starCount);
 
+    const [r, g, b] = starColor;
+    const styles = Array.from(
+      { length: BUCKETS },
+      (_, i) =>
+        `rgba(${r},${g},${b},${Math.min(1, ((i + 0.5) / BUCKETS) * 1.15)})`,
+    );
+    // Nearer stars (higher buckets) are drawn bigger
+    const sizes = Array.from(
+      { length: BUCKETS },
+      (_, i) => BASE_SIZE * (0.75 + (0.6 * i) / (BUCKETS - 1)),
+    );
+
     const clear = () => {
       c.fillStyle = backgroundColor;
       c.fillRect(0, 0, canvas.width, canvas.height);
-    };
-
-    const putPixel = (x: number, y: number, brightness: number) => {
-      const rgb =
-        "rgba(" +
-        starColor[0] +
-        "," +
-        starColor[1] +
-        "," +
-        starColor[2] +
-        "," +
-        brightness +
-        ")";
-      c.fillStyle = rgb;
-      c.fillRect(x, y, 1, 1);
     };
 
     const moveStars = (distance: number) => {
@@ -103,6 +114,7 @@ const Starfield = memo((props: Props) => {
     };
 
     let prevTime: number;
+    let speed = speedFactor;
 
     const init = (time: number) => {
       prevTime = time;
@@ -114,15 +126,28 @@ const Starfield = memo((props: Props) => {
     const tick = (time: number) => {
       if (!isRunning || !isVisible) return;
 
-      const elapsed = time - prevTime;
+      // Capped so a long frame doesn't teleport the stars
+      const elapsed = Math.min(time - prevTime, 50);
       prevTime = time;
 
-      moveStars(elapsed * speedFactor);
+      // Ease toward the requested speed so speeding up feels inertial
+      const warp = reduceMotion ? 1 : (warpRef?.current ?? 1);
+      speed +=
+        (speedFactor * warp - speed) * (1 - Math.exp(-elapsed / 280));
+      const distance = elapsed * speed;
+
+      moveStars(distance);
 
       clear();
 
       const cx = w / 2;
       const cy = h / 2;
+      // Past twice the cruise speed, stars become streaks from where they
+      // were ~4 frames (at 60fps) ago. Based on speed, not per-frame
+      // distance, so a slow frame rate doesn't streak the resting field.
+      const streak = speed > speedFactor * 2;
+      const tail = speed * 16 * 4;
+      const paths = Array.from({ length: BUCKETS }, () => new Path2D());
 
       const count = stars.length;
       for (let i = 0; i < count; i++) {
@@ -136,9 +161,31 @@ const Starfield = memo((props: Props) => {
         }
 
         const d = star.z / 1000.0;
-        const b = 1 - d * d;
+        const brightness = 1 - d * d;
+        const bucket = Math.min(BUCKETS - 1, (brightness * BUCKETS) | 0);
 
-        putPixel(x, y, b);
+        if (streak) {
+          const tailZ = Math.min(1000, star.z + tail);
+          paths[bucket].moveTo(
+            cx + star.x / (tailZ * 0.001),
+            cy + star.y / (tailZ * 0.001),
+          );
+          paths[bucket].lineTo(x, y);
+        } else {
+          const size = sizes[bucket];
+          paths[bucket].rect(x - size / 2, y - size / 2, size, size);
+        }
+      }
+
+      for (let i = 0; i < BUCKETS; i++) {
+        if (streak) {
+          c.strokeStyle = styles[i];
+          c.lineWidth = 1;
+          c.stroke(paths[i]);
+        } else {
+          c.fillStyle = styles[i];
+          c.fill(paths[i]);
+        }
       }
 
       animationFrameRef.current = requestAnimationFrame(tick);
@@ -166,7 +213,7 @@ const Starfield = memo((props: Props) => {
       }
       window.removeEventListener("resize", handleResize);
     };
-  }, [starColor, backgroundColor, speedFactor, starCount]);
+  }, [starColor, backgroundColor, speedFactor, starCount, warpRef]);
 
   return (
     <motion.canvas

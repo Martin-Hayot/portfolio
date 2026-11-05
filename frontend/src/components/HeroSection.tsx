@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import StarField from "./StarField";
 import "./HeroSection.css";
 
@@ -8,7 +10,70 @@ const tick = (extra: React.CSSProperties): React.CSSProperties => ({
     ...extra,
 });
 
+// Starfield speed multiplier while hovering the main CTA
+const WARP_HOVER = 5;
+
+// The page Loader fades out 200ms after window load, over 500ms
+const REVEAL_DELAY = 450;
+
+const nameLetter: Variants = {
+    hidden: { opacity: 0, y: "0.35em", filter: "blur(14px)" },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        transition: {
+            delay: i * 0.055,
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
+        },
+    }),
+};
+
+// One line of the name, revealed letter by letter. `offset` continues the
+// stagger from the previous line.
+const NameLine = ({
+    text,
+    color,
+    offset = 0,
+}: {
+    text: string;
+    color: string;
+    offset?: number;
+}) => (
+    <span aria-hidden="true" style={{ display: "block", color }}>
+        {[...text].map((letter, i) => (
+            <motion.span
+                key={i}
+                custom={offset + i}
+                variants={nameLetter}
+                style={{ display: "inline-block" }}
+            >
+                {letter}
+            </motion.span>
+        ))}
+    </span>
+);
+
 const HeroSection = () => {
+    const warpRef = useRef(1);
+    const reduceMotion = useReducedMotion();
+
+    // Hold the name reveal until the page Loader has faded out
+    const [revealed, setRevealed] = useState(false);
+    useEffect(() => {
+        let timer: ReturnType<typeof setTimeout>;
+        const reveal = () => {
+            timer = setTimeout(() => setRevealed(true), REVEAL_DELAY);
+        };
+        if (document.readyState === "complete") reveal();
+        else window.addEventListener("load", reveal, { once: true });
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener("load", reveal);
+        };
+    }, []);
+
     const scrollDown = () => {
         const el = document.getElementById("projects");
         if (el) window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
@@ -34,6 +99,7 @@ const HeroSection = () => {
                     starCount={4000}
                     speedFactor={0.04}
                     backgroundColor="#04060d"
+                    warpRef={warpRef}
                 />
             </div>
 
@@ -294,7 +360,10 @@ const HeroSection = () => {
                 </div>
 
                 {/* Name */}
-                <h1
+                <motion.h1
+                    aria-label="Martin Hayot"
+                    initial={reduceMotion ? false : "hidden"}
+                    animate={revealed || reduceMotion ? "visible" : "hidden"}
                     style={{
                         margin: 0,
                         fontWeight: 700,
@@ -304,13 +373,9 @@ const HeroSection = () => {
                         textShadow: "0 2px 40px rgba(4,6,13,0.85)",
                     }}
                 >
-                    <span style={{ display: "block", color: "#fff" }}>
-                        Martin
-                    </span>
-                    <span style={{ display: "block", color: ACCENT }}>
-                        Hayot
-                    </span>
-                </h1>
+                    <NameLine text="Martin" color="#fff" />
+                    <NameLine text="Hayot" color={ACCENT} offset={6} />
+                </motion.h1>
 
                 {/* Role + location */}
                 <div
@@ -367,6 +432,8 @@ const HeroSection = () => {
                     <a
                         href="#projects"
                         className="hero-cta-primary"
+                        onPointerEnter={() => (warpRef.current = WARP_HOVER)}
+                        onPointerLeave={() => (warpRef.current = 1)}
                         style={{
                             display: "inline-flex",
                             alignItems: "center",

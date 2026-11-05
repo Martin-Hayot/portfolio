@@ -138,31 +138,4 @@ export const projects: ProjectsProps[] = [
             { name: "Go", icon: "/go.svg" },
         ],
     },
-    {
-        num: "06",
-        title: "Electric City",
-        kicker: "Client & admin platform for a mastering studio",
-        description:
-            "Revamped a mastering studio's site with client and admin tools for orders, appointments and accounts, plus a custom booking calendar I built from scratch and automated email notifications for order updates.",
-        highlights: [
-            "Custom calendar",
-            "Order management",
-            "Email notifications",
-        ],
-        status: "2023",
-        statusColor: "#8e87a6",
-        domain: "electric-city.studio",
-        image: "/electric-city-homepage.png",
-        live: { href: "/calendar-preview", label: "See the calendar" },
-        repo: "https://github.com/Martin-Hayot/Projet-Dev-3",
-        tech: [
-            { name: "Vue 3", icon: "/vue.svg" },
-            { name: "Nuxt 3", icon: "/nuxt.svg" },
-            { name: "Node / Express", icon: "/nodejs.svg" },
-            { name: "Tailwind", icon: "/tailwindcss.svg" },
-            { name: "PostgreSQL", icon: "/postgresql.svg" },
-            { name: "Prisma", icon: "/prisma.svg" },
-            { name: "Vuetify 3", icon: "/vuetify.svg" },
-        ],
-    },
 ];

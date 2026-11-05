@@ -49,7 +49,6 @@ const NavBar: React.FC = () => {
     const links = [
         { href: "/", label: "Home", key: "" },
         { href: "/blog", label: "Blog", key: "blog" },
-        { href: "/#contact", label: "Contact", key: null },
     ];
 
     return (
@@ -62,6 +61,10 @@ const NavBar: React.FC = () => {
                 .mh-nav-link { display:inline-flex; align-items:center; gap:9px; color:rgba(255,255,255,0.55); text-decoration:none; transition:color .25s ease; }
                 .mh-nav-link:hover { color:#fff; }
                 .mh-nav-link.is-active { color:#fff; }
+                .mh-nav-cta { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:999px; background:#8B5CF6; color:#0b0a06; text-decoration:none; transition:transform .25s ease, box-shadow .25s ease, background .25s ease; }
+                .mh-nav-cta:hover { transform:translateY(-2px); background:#9d76f8; box-shadow:0 10px 26px rgba(139,92,246,0.4); }
+                .mh-nav-cta .mh-nav-cta-arrow { transition:transform .25s ease; }
+                .mh-nav-cta:hover .mh-nav-cta-arrow { transform:translateX(3px); }
             `}</style>
             <nav
                 className="flex items-center justify-between text-white py-6 px-6 md:px-12"
@@ -90,7 +93,7 @@ const NavBar: React.FC = () => {
                     }}
                 >
                     {links.map((link) => {
-                        const active = link.key !== null && pageName === link.key;
+                        const active = pageName === link.key;
                         return (
                             <a
                                 key={link.href}
@@ -112,6 +115,17 @@ const NavBar: React.FC = () => {
                             </a>
                         );
                     })}
+                    {/* Contact is a section of the home page, not a page:
+                        shown as a call to action rather than a nav link */}
+                    <a href="/#contact" className="mh-nav-cta">
+                        Contact
+                        <span
+                            className="mh-nav-cta-arrow"
+                            style={{ fontFamily: "'Space Mono', monospace" }}
+                        >
+                            →
+                        </span>
+                    </a>
                 </div>
                 <div className="lg:hidden z-20">
                     <MobileToggle />

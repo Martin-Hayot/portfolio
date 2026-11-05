@@ -1,6 +1,6 @@
 <section
     id="contact"
-    class="relative z-10 w-[90%] mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center lg:-mt-10 mb-40"
+    class="relative z-10 w-[90%] mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center lg:-mt-10 mb-40 scroll-mt-24 lg:scroll-mt-40"
 >
     <div>
         <div class="text-5xl font-bold text-gray-200 md:mt-0"></div>
@@ -72,9 +72,9 @@
                     <button
                         id="submit-btn"
                         type="submit"
-                        class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        Send message
+                        <span id="submit-label">Send message</span>
                     </button>
                     <p id="form-status" class="text-sm"></p>
                 </div>
@@ -86,14 +86,133 @@
 <script>
     const form = document.getElementById("contact-form") as HTMLFormElement;
     const btn = document.getElementById("submit-btn") as HTMLButtonElement;
+    const label = document.getElementById("submit-label") as HTMLSpanElement;
     const status = document.getElementById(
         "form-status",
     ) as HTMLParagraphElement;
 
+    // Pointing up: body, fins, porthole (cut out in the button colour), nozzle
+    const ROCKET_SVG = `
+        <svg viewBox="0 0 16 24" fill="currentColor">
+            <path d="M8 1C11 4 12 8 12 13v4H4v-4C4 8 5 4 8 1Z" />
+            <path d="M4 11.5 1 15.5V19l3-2Zm8 0 3 4V19l-3-2Z" />
+            <circle cx="8" cy="9" r="1.7" style="fill: hsl(var(--primary))" />
+            <rect x="6" y="17" width="4" height="2" rx="0.5" />
+        </svg>`;
+
+    const LAUNCH_MS = 1300;
+    // How long "Sent!" stays on the button before it resets
+    const SENT_HOLD_MS = 1800;
+
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+    // Swaps the button label with a small slide
+    const swapLabel = async (text: string) => {
+        await label.animate(
+            [{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-10px)", opacity: 0 }],
+            { duration: 180, easing: "ease-in", fill: "forwards" },
+        ).finished;
+        label.textContent = text;
+        await label.animate(
+            [{ transform: "translateY(10px)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }],
+            { duration: 220, easing: "ease-out", fill: "forwards" },
+        ).finished;
+    };
+
+    // Inside the button: the label clears, a rocket rises from the bottom edge,
+    // rumbles, then shoots out the top (clipped by the button) leaving a trail and
+    // smoke along the base. Resolves once it is gone.
+    const launchRocket = async () => {
+        await label.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 150,
+            fill: "forwards",
+        }).finished;
+
+        const pad = document.createElement("span");
+        pad.className = "rocket-pad";
+        pad.innerHTML = `<span class="rocket">${ROCKET_SVG}<span class="rocket-flame"></span><span class="rocket-trail"></span></span>`;
+        for (let i = 0; i < 6; i++) {
+            const puff = document.createElement("span");
+            puff.className = "rocket-puff";
+            pad.append(puff);
+        }
+        btn.append(pad);
+
+        const rocket = pad.querySelector(".rocket") as HTMLElement;
+        const flame = pad.querySelector(".rocket-flame") as HTMLElement;
+        const trail = pad.querySelector(".rocket-trail") as HTMLElement;
+        const climb = "cubic-bezier(0.5, 0, 0.9, 0.4)";
+        const h = btn.offsetHeight;
+        // Far enough that the rocket and its trail have both left the button
+        const exit = h + 40;
+
+        // Rise into view, short rumble, then accelerate out the top
+        const flight = rocket.animate(
+            [
+                { transform: `translateY(${h}px)`, easing: "cubic-bezier(0.2, 0.8, 0.3, 1)" },
+                { offset: 0.2, transform: "translateY(0)" },
+                { offset: 0.26, transform: "translate(-0.75px, 0)" },
+                { offset: 0.32, transform: "translate(0.75px, 0)" },
+                { offset: 0.38, transform: "translate(0, 0)", easing: climb },
+                { offset: 1, transform: `translateY(-${exit}px)` },
+            ],
+            { duration: LAUNCH_MS, fill: "forwards" },
+        );
+        // Idles small, flares on ignition, stays long through the climb
+        flame.animate(
+            [
+                { transform: "scale(0.5, 0.4)" },
+                { offset: 0.2, transform: "scale(0.6, 0.5)" },
+                { offset: 0.38, transform: "scale(1, 1.2)" },
+                { offset: 1, transform: "scale(0.9, 1.6)" },
+            ],
+            { duration: LAUNCH_MS, fill: "forwards" },
+        );
+        flame.animate(
+            [{ opacity: 1 }, { opacity: 0.7 }, { opacity: 1 }],
+            { duration: 90, iterations: Infinity },
+        );
+        trail.animate(
+            [
+                { transform: "scaleY(0)", opacity: 1 },
+                { offset: 0.38, transform: "scaleY(0)", opacity: 1, easing: climb },
+                { offset: 1, transform: "scaleY(1)", opacity: 0.2 },
+            ],
+            { duration: LAUNCH_MS, fill: "forwards" },
+        );
+        pad.querySelectorAll<HTMLElement>(".rocket-puff").forEach((puff, i) => {
+            const side = i % 2 ? 1 : -1;
+            const spread = 12 + (i >> 1) * 14;
+            puff.animate(
+                [
+                    { transform: "translate(0, 0) scale(0.4)", opacity: 0 },
+                    { offset: 0.15, transform: "translate(0, 0) scale(0.6)", opacity: 1 },
+                    {
+                        transform: `translate(${side * spread}px, -2px) scale(${1.2 + (i >> 1) * 0.4})`,
+                        opacity: 0,
+                    },
+                ],
+                {
+                    duration: LAUNCH_MS * 0.5,
+                    delay: LAUNCH_MS * 0.32,
+                    easing: "ease-out",
+                    fill: "forwards",
+                },
+            );
+        });
+
+        await flight.finished;
+        pad.remove();
+    };
+
+    let busy = false;
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
+        if (busy) return;
+        busy = true;
         btn.disabled = true;
-        btn.textContent = "Sending…";
+        label.textContent = "Sending…";
         status.textContent = "";
 
         const data = new FormData(form);
@@ -114,8 +233,15 @@
 
             if (res.ok) {
                 form.reset();
+                // Undim the button for the launch; `busy` still blocks resubmits
+                btn.disabled = false;
+                if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+                    await launchRocket();
                 status.textContent = "Message sent! I'll get back to you soon.";
                 status.className = "text-sm text-violet-300";
+                await swapLabel("Sent!");
+                await wait(SENT_HOLD_MS);
+                await swapLabel("Send message");
             } else {
                 status.textContent =
                     json.error ?? "Something went wrong. Please try again.";
@@ -125,8 +251,72 @@
             status.textContent = "Something went wrong. Please try again.";
             status.className = "text-sm text-red-400";
         } finally {
+            busy = false;
             btn.disabled = false;
-            btn.textContent = "Send message";
+            label.getAnimations().forEach((a) => a.cancel());
+            label.textContent = "Send message";
         }
     });
 </script>
+
+<style is:global>
+    /* Launch effect added by launchRocket(); global because the elements are
+       created from the script. The button clips it (overflow-hidden). */
+    .rocket-pad {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        pointer-events: none;
+    }
+    /* Resting position: centred in the button */
+    .rocket {
+        position: absolute;
+        left: -8px;
+        top: 50%;
+        margin-top: -12px;
+        width: 16px;
+        height: 24px;
+    }
+    .rocket svg {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    /* Hangs from the nozzle */
+    .rocket-flame {
+        position: absolute;
+        left: 5px;
+        top: 18px;
+        width: 6px;
+        height: 9px;
+        transform-origin: top;
+        border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+        background: linear-gradient(to bottom, #fde047, #f97316 55%, rgba(249, 115, 22, 0));
+    }
+    .rocket-trail {
+        position: absolute;
+        left: 7px;
+        top: 24px;
+        width: 2px;
+        height: 56px;
+        transform-origin: top;
+        transform: scaleY(0);
+        background: linear-gradient(to bottom, rgba(163, 163, 163, 0.7), rgba(163, 163, 163, 0));
+        border-radius: 2px;
+    }
+    .rocket-puff {
+        position: absolute;
+        left: -6px;
+        bottom: -5px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(163, 163, 163, 0.35);
+        filter: blur(2px);
+        opacity: 0;
+    }
+</style>
