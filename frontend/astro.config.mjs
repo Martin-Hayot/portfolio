@@ -5,6 +5,7 @@ import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import vue from "@astrojs/vue";
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,4 +21,7 @@ export default defineConfig({
         }),
     },
     integrations: [vue(), react()],
+    vite: {
+        plugins: [tailwindcss()],
+    },
 });
